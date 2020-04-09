@@ -1,0 +1,7 @@
+{
+  "name": "SOSApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
