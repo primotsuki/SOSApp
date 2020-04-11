@@ -1,0 +1,47 @@
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Registrarse</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <form [formGroup]="RegisterForm" (ngSubmit)="OnSubmit">
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+          <ion-label position="stacked">Nombre de usuario</ion-label>
+          <ion-input type="text" formControlName="username"></ion-input>
+          <ng-container *ngIf="submitted && f.username.errors">
+            <p class="error-message"> *El campo es requerido</p>
+          </ng-container>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Correo Electronico</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+          <ng-container *ngIf="submitted && f.email.errors">
+            <p class="error-message"> *El Email debe ser valido</p>
+          </ng-container>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input type="text" formControlName="password"></ion-input>
+          <ng-container *ngIf="submitted && f.password.errors">
+            <p class="error-message"> *El campo es requerido</p>
+          </ng-container>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Repita la contraseña</ion-label>
+          <ion-input type="text" formControlName="repeatPassword"></ion-input>
+          <ng-container *ngIf="submitted && f.repeatPassword.errors">
+            <p class="error-message"> *El campo es requerido</p>
+          </ng-container>
+        </ion-item>
+      </ion-list>
+      <div class="ion-padding">
+        <ion-button expand="block" color="success" type="submit">Registrarse</ion-button>
+      </div>
+      <div class="ion-padding">
+        <ion-button expand="block" color="danger">Cancelar</ion-button>
+      </div>
+    </form>
+  </ion-content>
+</ion-app>
