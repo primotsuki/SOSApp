@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { userGQL } from '../../graphql/user';
+import { pluck } from "rxjs/operators";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -14,13 +17,14 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public userquery: userGQL
   ) { }
 
   ngOnInit() {
     this.RegisterForm = this.formBuilder.group({
       username: ['', Validators.required],
-      email: ['', Validators.email],
+      email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
       repeatPassword: ['', Validators.required]
     });
@@ -30,15 +34,23 @@ export class RegisterComponent implements OnInit {
 
   OnSubmit() {
     this.submitted = true;
+    console.log('entro al formulario');
     if (this.RegisterForm.invalid) {
       return;
     } else {
-      const user = {
-        username: this.f.username.value,
-        email: this.f.email.value,
-        password: this.f.password.value
-      }
-      console.log(user);
+      this.userquery
+      .newUser({
+          username: this.f.username.value,
+          email: this.f.email.value,
+          password: this.f.email.value
+        }).subscribe(
+        ({data}) => {
+          console.log("got data", data);
+
+        }, error => {
+          alert("hubo un error al acceder a esta funcion" + error);
+        }
+      )
     }
   }
 

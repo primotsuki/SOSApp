@@ -5,7 +5,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <form [formGroup]="RegisterForm" (ngSubmit)="OnSubmit">
+    <form [formGroup]="RegisterForm" (ngSubmit)="OnSubmit()">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
           <ion-label position="stacked">Nombre de usuario</ion-label>
@@ -23,14 +23,14 @@
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Contraseña</ion-label>
-          <ion-input type="text" formControlName="password"></ion-input>
+          <ion-input type="password" formControlName="password"></ion-input>
           <ng-container *ngIf="submitted && f.password.errors">
             <p class="error-message"> *El campo es requerido</p>
           </ng-container>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Repita la contraseña</ion-label>
-          <ion-input type="text" formControlName="repeatPassword"></ion-input>
+          <ion-input type="password" formControlName="repeatPassword"></ion-input>
           <ng-container *ngIf="submitted && f.repeatPassword.errors">
             <p class="error-message"> *El campo es requerido</p>
           </ng-container>
