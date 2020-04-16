@@ -1,23 +1,29 @@
 <ion-app>
   <ion-header translucent>
-    <ion-toolbar>
+    <ion-toolbar color="success">
       <ion-title>Ingresar</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content fullscreen>
-    <form>
+    <form [formGroup] = "LoginForm" (ngSubmit)="OnSubmit()">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
           <ion-label position="stacked">Email</ion-label>
-          <ion-input required type="text"></ion-input>
+          <ion-input required type="text" formControlName="email"></ion-input>
+          <ng-container *ngIf="submitted && f.email.errors">
+            <p class="error-message"> *El campo es requerido</p>
+          </ng-container>
         </ion-item>
         <ion-item>
           <ion-label position="stacked">Contraseña</ion-label>
-          <ion-input required type="password"></ion-input>
+          <ion-input required type="password" formControlName="password"></ion-input>
+          <ng-container *ngIf="submitted && f.password.errors">
+            <p class="error-message"> *El campo es requerido</p>
+          </ng-container>
         </ion-item>
       </ion-list>
       <div class="ion-padding">
-        <ion-button expand="block" color="success">ingresar</ion-button>
+        <ion-button expand="block" color="success" type="submit">ingresar</ion-button>
       </div>
     </form>
   </ion-content>

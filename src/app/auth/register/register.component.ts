@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { userGQL } from '../../graphql/user';
-import { pluck } from "rxjs/operators";
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +18,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    public userquery: userGQL
+    private userquery: userGQL,
+    private alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -34,7 +35,6 @@ export class RegisterComponent implements OnInit {
 
   OnSubmit() {
     this.submitted = true;
-    console.log('entro al formulario');
     if (this.RegisterForm.invalid) {
       return;
     } else {
@@ -42,16 +42,22 @@ export class RegisterComponent implements OnInit {
       .newUser({
           username: this.f.username.value,
           email: this.f.email.value,
-          password: this.f.email.value
+          password: this.f.password.value
         }).subscribe(
         ({data}) => {
-          console.log("got data", data);
-
+          this.okAlert();
         }, error => {
           alert("hubo un error al acceder a esta funcion" + error);
         }
       )
     }
   }
-
+  async okAlert() {
+    const alert = await this.alertController.create({
+      header: 'Confirmacion',
+      message: 'El registro se completo',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 }
