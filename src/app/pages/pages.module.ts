@@ -9,9 +9,16 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
 import { MascotasComponent } from './mascotas/mascotas.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { MascotaModalComponent } from './modals/mascota-modal/mascota-modal.component';
 
 @NgModule({
-  declarations: [PagesComponent,InicioComponent, MascotasComponent ],
+  declarations: [PagesComponent,
+    InicioComponent,
+    MascotasComponent,
+    MascotaModalComponent ],
+  entryComponents: [
+    MascotaModalComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,

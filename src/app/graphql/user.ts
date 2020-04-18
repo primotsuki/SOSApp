@@ -50,6 +50,6 @@ export class userGQL {
         }));
     }
     public get currentUserValue(){
-        return this.currentUserSubject.value;
+        return this.currentUserSubject.value.login;
     }
 }

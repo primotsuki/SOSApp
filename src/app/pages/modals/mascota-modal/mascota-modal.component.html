@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Nueva Mascota</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="mascotaForm" (ngSubmit)="OnSubmit()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input type="text" formControlName="nombre"></ion-input>
+        <ng-container *ngIf="submitted && f.nombre.errors">
+          <p class="error-message"> *El campo es requerido</p>
+        </ng-container>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Caracteristicas</ion-label>
+        <ion-input type="text" formControlName="caracteristicas"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select formControlName="tipo">
+          <ion-select-option *ngFor="let tipo of tipos" value="{{tipo.id}}">{{tipo.descripcion}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Color</ion-label>
+        <ion-input type="text" formControlName="color"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-select placeholder="Seleccione una opcion" formControlName="fecha_exacta">
+            <ion-select-option value="t">Fecha Exacta</ion-select-option>
+            <ion-select-option value="f">Fecha Aproximada</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item *ngIf="f.fecha_exacta.value =='t'">
+        <ion-label position="stacked">Fecha de nacimiento</ion-label>
+        <ion-datetime formControlName="fecha_nacimiento"></ion-datetime>
+      </ion-item>
+      <ion-item *ngIf="f.fecha_exacta.value =='f'">
+        <ion-label position="stacked">Mes de nacimiento Aprox.</ion-label>
+        <ion-input type="text" formControlName="mes_aprox"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="f.fecha_exacta.value =='f'">
+        <ion-label position="stacked">Año de nacimiento Aprox.</ion-label>
+        <ion-input type="text" formControlName="year_aprox"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" color="success" type="submit">Guardar Mascota</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button expand="block" color="danger" (click)="close()">Cancelar</ion-button>
+    </div>
+  </form>
+</ion-content>
