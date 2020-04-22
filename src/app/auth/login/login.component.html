@@ -5,6 +5,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content fullscreen>
+      <ion-img style="margin: 50px" src="assets/soslogo.png"></ion-img>
     <form [formGroup] = "LoginForm" (ngSubmit)="OnSubmit()">
       <ion-list lines="full" class="ion-no-margin ion-no-padding">
         <ion-item>
@@ -24,6 +25,9 @@
       </ion-list>
       <div class="ion-padding">
         <ion-button expand="block" color="success" type="submit">ingresar</ion-button>
+      </div>
+      <div style="margin-left: 50px;">
+        <a [routerLink]="['/auth/register']">Aun no tienes cuenta? registrate aqui</a>
       </div>
     </form>
   </ion-content>

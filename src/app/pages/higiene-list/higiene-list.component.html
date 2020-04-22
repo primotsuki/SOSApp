@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Higiene</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-item [routerLink]="['1/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="rainy" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Baño</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['2/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="hand-right" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Uñas</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['3/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="cut" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Pelo</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['4/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="ear" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Oidos</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['5/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="medkit" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Dientes</ion-label>
+  </ion-item>
+</ion-content>

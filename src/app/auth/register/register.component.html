@@ -1,6 +1,6 @@
 <ion-app>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="success">
       <ion-title>Registrarse</ion-title>
     </ion-toolbar>
   </ion-header>
@@ -40,8 +40,9 @@
         <ion-button expand="block" color="success" type="submit">Registrarse</ion-button>
       </div>
       <div class="ion-padding">
-        <ion-button expand="block" color="danger">Cancelar</ion-button>
+        <ion-button expand="block" color="danger" [routerLink]="['/auth/login']">Cancelar</ion-button>
       </div>
     </form>
+    <ion-img style="margin-top: 70px;margin-right: 100px;margin-left: 100px;" src="assets/soslogo.png"></ion-img>
   </ion-content>
 </ion-app>

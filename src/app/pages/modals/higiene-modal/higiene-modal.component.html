@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Nuevo registro de {{manten_desc}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="higieneForm" (ngSubmit)="OnSubmit()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label>Programado</ion-label>
+        <ion-toggle formControlName="programado" color="success"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Fecha:</ion-label>
+        <ion-datetime formControlName="fecha_mantenimiento" (ngModelChange)="OndateChange($e)"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Recordatorio</ion-label>
+        <ion-toggle formControlName="recordatorio" color="success"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Realizado</ion-label>
+        <ion-toggle formControlName="realizado" color="success"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Recordar en </ion-label>
+        <ion-select formControlName="num_prog" (ngModelChange)="OndateChange($e)">
+          <ion-select-option value="1">1</ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+          <ion-select-option value="5">5</ion-select-option>
+          <ion-select-option value="6">6</ion-select-option>
+          <ion-select-option value="7">7</ion-select-option>
+          <ion-select-option value="8">8</ion-select-option>
+          <ion-select-option value="9">9</ion-select-option>
+          <ion-select-option value="10">10</ion-select-option>
+          <ion-select-option value="11">11</ion-select-option>
+          <ion-select-option value="12">12</ion-select-option>
+          <ion-select-option value="13">13</ion-select-option>
+        </ion-select>
+        <ion-select formControlName="intervalo_prog" (ngModelChange)="OndateChange($e)">
+          <ion-select-option value="dias">Dias</ion-select-option>
+          <ion-select-option value="semanas">semanas</ion-select-option>
+          <ion-select-option value="meses">meses</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Proximo</ion-label>
+        <ion-datetime formControlName="proximo"></ion-datetime>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" color="success" type="submit">Guardar Registro</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button expand="block" color="danger" (click)="close()">Cancelar</ion-button>
+    </div>
+  </form>
+</ion-content>

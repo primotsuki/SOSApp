@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoMascota, TipoMascotaGQL } from '../../../graphql/tipomascota';
@@ -53,7 +53,6 @@ export class MascotaModalComponent implements OnInit {
   OnSubmit(){
     this.submitted = true;
     if(this.mascotaForm.invalid){
-      console.log('es invalido');
       return;
     } else {
       this.mascotaQuery.submitMascota({
@@ -63,7 +62,8 @@ export class MascotaModalComponent implements OnInit {
         color: this.f.color.value,
         mes_aprox: this.f.mes_aprox.value,
         year_aprox: this.f.year_aprox.value,
-        tipo_id: this.f.tipo.value
+        tipo_id: this.f.tipo.value,
+        
       }).subscribe(data=>{
         this.modalCtrl.dismiss({
           completed:true

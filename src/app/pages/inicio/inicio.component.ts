@@ -26,7 +26,6 @@ export class InicioComponent implements OnInit {
       user_id: this.userQuery.currentUserValue.user_id
     })
     .valueChanges.subscribe(data=>{
-      console.log(data);
       this.mascotas = data.data.MascotaByUser;
     });
   }
@@ -35,14 +34,9 @@ export class InicioComponent implements OnInit {
       component: MascotaModalComponent
     });
     modal.onWillDismiss().then(data=>{
-      console.log(data.data.completed);
       if(data.data.completed)
         this.ngOnInit();
     });
     return await modal.present();
-  }
-  getConfirmation(message: boolean) {
-    this.confirmMessage = message;
-    console.log('se agrego correctamente la mascota');
   }
 }

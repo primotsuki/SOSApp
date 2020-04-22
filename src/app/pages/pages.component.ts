@@ -13,37 +13,29 @@ export class PagesComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'Inbox',
-      url: '/folder/Inbox',
-      icon: 'mail'
+      title: 'Mis mascotas',
+      url: '/pages/inicio',
+      icon: 'paw'
     },
     {
-      title: 'Outbox',
-      url: '/folder/Outbox',
-      icon: 'paper-plane'
+      title: 'Sincronizar datos',
+      url: '/pages/inicio',
+      icon: 'cloud-upload'
     },
     {
-      title: 'Favorites',
+      title: 'Ley para la defensa de animales',
       url: '/folder/Favorites',
-      icon: 'heart'
-    },
-    {
-      title: 'Archived',
+      icon: 'library'
+    },{
+      title: 'Informacion',
       url: '/folder/Archived',
-      icon: 'archive'
-    },
-    {
-      title: 'Trash',
-      url: '/folder/Trash',
-      icon: 'trash'
-    },
-    {
-      title: 'Spam',
-      url: '/folder/Spam',
-      icon: 'warning'
+      icon: 'information-circle'
+    },{
+      title: 'Salir',
+      url: '/folder/Archived',
+      icon: 'log-out'
     }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
@@ -61,9 +53,5 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    const path = window.location.pathname.split('folder/')[1];
-    if (path !== undefined) {
-      this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
-    }
   }
 }

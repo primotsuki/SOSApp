@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{manten.descripcion}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item-divider>
+      <ion-label>AGENDA</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label> repetir una vez cada</ion-label> {{regVigente.num_prog}} {{regVigente.intervalo_prog}}
+    </ion-item>
+    <ion-item-divider>
+      <ion-label>PROXIMO</ion-label>
+    </ion-item-divider>
+    <ion-item>
+      <ion-label>{{regVigente.proximo}}</ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <ion-label>REGISTROS ANTERIORES</ion-label>
+    </ion-item-divider>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="openModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

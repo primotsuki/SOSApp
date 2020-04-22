@@ -14,13 +14,13 @@
         No se Agrego ninguna mascota
       </ion-col>
       <ion-col size="6" *ngFor="let mascota of mascotas">
-          <ion-card>
+          <ion-card [routerLink]="['/pages/mascotas', mascota.id]">
             <img src="assets/images/pet-avatar.png" />
             <ion-card-header>
               <ion-card-title>{{mascota.nombre}}</ion-card-title>
               <ion-card-subtitle>{{mascota.tipo.descripcion}}</ion-card-subtitle>
             </ion-card-header>
-  </ion-card>
+          </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

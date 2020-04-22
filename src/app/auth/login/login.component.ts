@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import { userGQL } from '../../graphql/user';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private userQuery: userGQL
+    private userQuery: userGQL,
+    private toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
@@ -37,10 +39,21 @@ export class LoginComponent implements OnInit {
         email: this.f.email.value,
         password: this.f.password.value
       }).subscribe(
-        ({data}) => {
-          console.log(data);
-        }, error => {
-          alert("hubo un error");
+        async ({data}) => {
+          const toast = await this.toastCtrl.create({
+            message: 'El usuario autenticado satisfactoriamente',
+            duration: 2000,
+            position: 'top'
+          });
+         await toast.present();
+         this.router.navigate(['/pages/inicio']);
+        }, async error => {
+          const toast = await this.toastCtrl.create({
+            message: 'El usuario y/o contraseña son incorrectos',
+            duration: 2000,
+            position: 'top'
+          });
+          toast.present();
         }
       )
     }

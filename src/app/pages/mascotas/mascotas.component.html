@@ -1,20 +1,91 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="success">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
+    <ion-title>Cuidados</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <p>
-    Mascotas works!
-  </p>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card [routerLink]="['limpieza']">
+            <ion-icon name="bandage" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Limpieza</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="eyedrop" size="large"></ion-icon>
+        <ion-card-header>
+          <ion-card-subtitle>Vacunacion</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card [routerLink]="['higiene']">
+          <ion-icon name="water" size="large"></ion-icon>
+        <ion-card-header>
+          <ion-card-subtitle>Higiene</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="flask" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Medicamentos</ion-card-subtitle>
+          </ion-card-header>
+      </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="bar-chart" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Mediciones</ion-card-subtitle>
+          </ion-card-header>
+      </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="nutrition" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Comidas</ion-card-subtitle>
+          </ion-card-header>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="fitness" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Salud</ion-card-subtitle>
+          </ion-card-header>
+      </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="images" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Galeria</ion-card-subtitle>
+          </ion-card-header>
+      </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card>
+          <ion-icon name="logo-octocat" size="large"></ion-icon>
+          <ion-card-header>
+            <ion-card-subtitle>Adopciones</ion-card-subtitle>
+          </ion-card-header>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
