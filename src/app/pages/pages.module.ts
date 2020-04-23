@@ -14,7 +14,10 @@ import { HigieneListComponent } from './higiene-list/higiene-list.component';
 import { HigieneFillComponent } from './higiene-fill/higiene-fill.component';
 import { HigieneModalComponent } from './modals/higiene-modal/higiene-modal.component';
 import { LimpiezaListComponent } from './limpieza-list/limpieza-list.component';
-
+import { VacunasComponent } from './vacunas/vacunas.component';
+import { VacunasModalComponent } from './modals/vacunas-modal/vacunas-modal.component';
+import { SearchVacunaComponent } from './modals/search-vacuna/search-vacuna.component';
+import { PipesModule } from '../pipes/pipes.module';
 import {MomentModule} from 'ngx-moment';
 @NgModule({
   declarations: [PagesComponent,
@@ -24,10 +27,15 @@ import {MomentModule} from 'ngx-moment';
     HigieneListComponent,
     HigieneFillComponent,
     HigieneModalComponent,
-    LimpiezaListComponent ],
+    LimpiezaListComponent,
+    VacunasComponent,
+    VacunasModalComponent,
+    SearchVacunaComponent],
   entryComponents: [
     MascotaModalComponent,
-    HigieneModalComponent
+    HigieneModalComponent,
+    VacunasModalComponent,
+    SearchVacunaComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +48,8 @@ import {MomentModule} from 'ngx-moment';
       relativeTimeThresholdOptions: {
         'm': 59
       }
-    })
+    }),
+    PipesModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

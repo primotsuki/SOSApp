@@ -63,20 +63,16 @@ export class HigieneFillComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      console.log(data);
+
     });
     return await modal.present();
   }
   async findVigente (){
-    this.regVigente = await this.mantenimientos.filter(
-      elem=>{
-        return !elem.realizado
-      }
-    )[0];
-    const value = parseInt(this.regVigente.proximo);
-    const fecha =  moment(value);
-    this.mantenimientos = await this.mantenimientos.filter(elem=>{
-      return elem.realizado;
+    const index = await this.mantenimientos.findIndex(elem=>{
+      return !elem.realizado;
     })
+    const rem = this.mantenimientos.splice(index,1)[0];
+    this.regVigente = rem;
+    this.regVigente.proximo = moment(new Date(parseInt(this.regVigente.proximo))).format('LL');
   }
 }

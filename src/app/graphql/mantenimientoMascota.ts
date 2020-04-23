@@ -60,7 +60,6 @@ export class submitMantenimiento{
                 private userQuery: userGQL)
                 {}
     submitManten(mantenimiento:any) {
-        console.log(mantenimiento);
         return this.apollo.mutate({
             mutation: this.mutation,
             variables: mantenimiento

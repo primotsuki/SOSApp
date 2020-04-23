@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Vacunas</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let vacuna of vacunasMascota">
+      <ion-label>
+        <h3>{{vacuna.vacuna.descripcion}}</h3>
+        <p>{{vacuna.fecha_vacuna | DateFormat}}</p>
+      </ion-label>
+      <ion-chip color="success" *ngIf="vacuna.realizado">
+        <ion-icon name="checkmark"></ion-icon>
+        <ion-label>realizado</ion-label>
+      </ion-chip>
+      <ion-chip color="primary" *ngIf="!vacuna.realizado">
+        <ion-icon name="alert-circle"></ion-icon>
+        <ion-label>pendiente</ion-label>
+      </ion-chip>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="openModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Buscar vacuna</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar placeholder="Buscar vacuna"
+                  animated
+                  (ionChange)="buscarVacuna( $event )"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let vacuna of vacunas | filtro:textoBuscar" (click)="selectVacuna(vacuna)">
+      <ion-label>
+        {{vacuna.descripcion}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

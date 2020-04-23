@@ -6,7 +6,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { HigieneListComponent } from './higiene-list/higiene-list.component';
 import { HigieneFillComponent } from './higiene-fill/higiene-fill.component';
 import { LimpiezaListComponent } from './limpieza-list/limpieza-list.component';
-
+import { VacunasComponent } from './vacunas/vacunas.component';
 const routes: Routes = [{
     path: '',
     component: PagesComponent,
@@ -28,7 +28,10 @@ const routes: Routes = [{
         },{
           path: 'mascotas/:id/limpieza/:higiene_id/fill',
           component: HigieneFillComponent
-        },
+        },{
+          path: 'mascotas/:id/vacuna',
+          component: VacunasComponent
+        }
     ]
 }];
 
