@@ -17,6 +17,12 @@ import { LimpiezaListComponent } from './limpieza-list/limpieza-list.component';
 import { VacunasComponent } from './vacunas/vacunas.component';
 import { VacunasModalComponent } from './modals/vacunas-modal/vacunas-modal.component';
 import { SearchVacunaComponent } from './modals/search-vacuna/search-vacuna.component';
+import { MedicamentosComponent } from './medicamentos/medicamentos.component';
+import { MedicamentosModalComponent } from './modals/medicamentos-modal/medicamentos-modal.component';
+import { MedicamentosSearchComponent } from './modals/medicamentos-search/medicamentos-search.component';
+import { MedicionesListComponent } from './mediciones-list/mediciones-list.component';
+import { MedicionesFillComponent } from './mediciones-fill/mediciones-fill.component';
+import { MedidaModalComponent } from './modals/medida-modal/medida-modal.component';
 import { PipesModule } from '../pipes/pipes.module';
 import {MomentModule} from 'ngx-moment';
 @NgModule({
@@ -30,12 +36,22 @@ import {MomentModule} from 'ngx-moment';
     LimpiezaListComponent,
     VacunasComponent,
     VacunasModalComponent,
-    SearchVacunaComponent],
+    SearchVacunaComponent,
+    MedicamentosComponent,
+    MedicamentosModalComponent,
+    MedicamentosSearchComponent,
+    MedicionesFillComponent,
+    MedicionesListComponent,
+    MedidaModalComponent
+  ],
   entryComponents: [
     MascotaModalComponent,
     HigieneModalComponent,
     VacunasModalComponent,
-    SearchVacunaComponent
+    SearchVacunaComponent,
+    MedicamentosSearchComponent,
+    MedicamentosModalComponent,
+    MedidaModalComponent
   ],
   imports: [
     CommonModule,

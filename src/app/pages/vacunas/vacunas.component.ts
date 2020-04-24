@@ -39,9 +39,6 @@ export class VacunasComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      console.log(data.data);
-      console.log(data.data.new.fecha_vacuna);
-
       this.vacunasMascota.push({
         id: data.data.new.saveVacunaMascota.id,
         fecha_vacuna: data.data.new.saveVacunaMascota.fecha_vacuna,

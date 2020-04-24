@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mediciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-item [routerLink]="['1/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="timer" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Peso</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['2/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="thermometer" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Temperatura</ion-label>
+  </ion-item>
+  <ion-item [routerLink]="['3/fill']">
+    <ion-avatar slot=start>
+      <ion-icon name="bar-chart" size="large"></ion-icon>
+    </ion-avatar>
+    <ion-label>Altura</ion-label>
+  </ion-item>
+</ion-content>

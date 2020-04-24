@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Buscar Medicamento</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar placeholder="Buscar medicamento"
+                  animated
+                  (ionChange)="buscarMedicamento( $event )"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let medicamento of medicamentos | filtro:textoBuscar" (click)="selectMedicamento(medicamento)">
+      <ion-label>
+        {{medicamento.descripcion}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

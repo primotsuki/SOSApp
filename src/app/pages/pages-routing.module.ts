@@ -7,6 +7,9 @@ import { HigieneListComponent } from './higiene-list/higiene-list.component';
 import { HigieneFillComponent } from './higiene-fill/higiene-fill.component';
 import { LimpiezaListComponent } from './limpieza-list/limpieza-list.component';
 import { VacunasComponent } from './vacunas/vacunas.component';
+import { MedicionesListComponent } from './mediciones-list/mediciones-list.component';
+import { MedicionesFillComponent } from './mediciones-fill/mediciones-fill.component';
+import { MedicamentosComponent } from './medicamentos/medicamentos.component';
 const routes: Routes = [{
     path: '',
     component: PagesComponent,
@@ -31,6 +34,15 @@ const routes: Routes = [{
         },{
           path: 'mascotas/:id/vacuna',
           component: VacunasComponent
+        },{
+          path: 'mascotas/:id/medicamentos',
+          component: MedicamentosComponent
+        },{
+          path: 'mascotas/:id/medicion',
+          component: MedicionesListComponent
+        },{
+          path: 'mascotas/:id/medicion/:med_id/fill',
+          component: MedicionesFillComponent
         }
     ]
 }];

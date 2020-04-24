@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Medicamentos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let medi of medicamentos">
+      <ion-label>
+        <h3>{{medi.medicamento.descripcion}}</h3>
+        <p>{{medi.fecha_medicamento | DateFormat}}</p>
+      </ion-label>
+      <ion-chip color="success" *ngIf="medi.realizado">
+        <ion-icon name="checkmark"></ion-icon>
+        <ion-label>realizado</ion-label>
+      </ion-chip>
+      <ion-chip color="primary" *ngIf="!medi.realizado">
+        <ion-icon name="alert-circle"></ion-icon>
+        <ion-label>pendiente</ion-label>
+      </ion-chip>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="success" (click)="openModal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
