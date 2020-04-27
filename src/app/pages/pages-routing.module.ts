@@ -10,6 +10,11 @@ import { VacunasComponent } from './vacunas/vacunas.component';
 import { MedicionesListComponent } from './mediciones-list/mediciones-list.component';
 import { MedicionesFillComponent } from './mediciones-fill/mediciones-fill.component';
 import { MedicamentosComponent } from './medicamentos/medicamentos.component';
+import { AlergiasComponent } from './alergias/alergias.component';
+import { PatologiasComponent } from './patologias/patologias.component';
+import { PruebaDiagnosticoComponent } from './prueba-diagnostico/prueba-diagnostico.component';
+import { SaludComponent } from './salud/salud.component';
+
 const routes: Routes = [{
     path: '',
     component: PagesComponent,
@@ -43,6 +48,18 @@ const routes: Routes = [{
         },{
           path: 'mascotas/:id/medicion/:med_id/fill',
           component: MedicionesFillComponent
+        },{
+          path: 'mascotas/:id/salud',
+          component: SaludComponent
+        },{
+          path: 'mascotas/:id/salud/pruebas',
+          component: PruebaDiagnosticoComponent
+        },{
+          path: 'mascotas/:id/salud/patologias',
+          component: PatologiasComponent
+        }, {
+          path: 'mascotas/:id/salud/alergias',
+          component: AlergiasComponent
         }
     ]
 }];

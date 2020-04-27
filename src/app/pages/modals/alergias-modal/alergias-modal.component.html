@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Nuevo registro</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="alergiaForm" (ngSubmit)="OnSubmit()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Nombre de la Alergia</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Fecha de diagnostico:</ion-label>
+        <ion-datetime formControlName="fecha_diagnostico"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Gravedad</ion-label>
+        <ion-select formControlName="gravedad">
+          <ion-select-option value="RAST 0 - Indetectable">RAST 0 - Indetectable</ion-select-option>
+          <ion-select-option value="RAST 1 - Bajo">RAST 1 - Bajo</ion-select-option>
+          <ion-select-option value="RAST 2 - Moderado">RAST 2 - Moderado</ion-select-option>
+          <ion-select-option value="RAST 3 - Alto">RAST 3 - Alto</ion-select-option>
+          <ion-select-option value="RAST 4 - Muy Alto">RAST 4 - Muy Alto</ion-select-option>
+          <ion-select-option value="RAST 5 - Ultra Alto">RAST 5 - Ultra Alto</ion-select-option>
+          <ion-select-option value="RAST 6 - Excesivamente Alto">RAST 6 - Excesivamente Alto</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select formControlName="categoria">
+          <ion-select-option value="Alimentarias">Alimentarias</ion-select-option>
+          <ion-select-option value="Ambientales">Ambientales</ion-select-option>
+          <ion-select-option value="Parasitos">Parasitos></ion-select-option>
+          <ion-select-option value="Otros">Otros</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Notas</ion-label>
+        <ion-textarea formControlName="notas">
+
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" color="success" type="submit">Guardar Registro</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button expand="block" color="danger" (click)="close()">Cancelar</ion-button>
+    </div>
+  </form>
+</ion-content>

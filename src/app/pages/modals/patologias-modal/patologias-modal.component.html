@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Nuevo registro</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="patologiaForm" (ngSubmit)="OnSubmit()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Nombre de la Patologia</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Fecha de diagnostico:</ion-label>
+        <ion-datetime formControlName="fecha"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Gravedad</ion-label>
+        <ion-select formControlName="gravedad">
+          <ion-select-option value="Menor">Menor</ion-select-option>
+          <ion-select-option value="Medio">Medio</ion-select-option>
+          <ion-select-option value="Mayor">Mayor</ion-select-option>
+          <ion-select-option value="Critico">Critico</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Acciones realizadas</ion-label>
+        <ion-textarea formControlName="acciones">
+
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Notas</ion-label>
+        <ion-textarea formControlName="notas">
+
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" color="success" type="submit">Guardar Registro</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button expand="block" color="danger" (click)="close()">Cancelar</ion-button>
+    </div>
+  </form>
+</ion-content>

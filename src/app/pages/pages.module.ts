@@ -23,6 +23,13 @@ import { MedicamentosSearchComponent } from './modals/medicamentos-search/medica
 import { MedicionesListComponent } from './mediciones-list/mediciones-list.component';
 import { MedicionesFillComponent } from './mediciones-fill/mediciones-fill.component';
 import { MedidaModalComponent } from './modals/medida-modal/medida-modal.component';
+import { AlergiasComponent } from './alergias/alergias.component';
+import { PatologiasComponent } from './patologias/patologias.component';
+import { PruebaDiagnosticoComponent } from './prueba-diagnostico/prueba-diagnostico.component';
+import { AlergiasModalComponent } from './modals/alergias-modal/alergias-modal.component';
+import { PatologiasModalComponent } from './modals/patologias-modal/patologias-modal.component';
+import { PruebasModalComponent } from './modals/pruebas-modal/pruebas-modal.component';
+import { SaludComponent } from './salud/salud.component';
 import { PipesModule } from '../pipes/pipes.module';
 import {MomentModule} from 'ngx-moment';
 @NgModule({
@@ -42,7 +49,14 @@ import {MomentModule} from 'ngx-moment';
     MedicamentosSearchComponent,
     MedicionesFillComponent,
     MedicionesListComponent,
-    MedidaModalComponent
+    MedidaModalComponent,
+    AlergiasComponent,
+    PatologiasComponent,
+    PruebaDiagnosticoComponent,
+    AlergiasModalComponent,
+    PatologiasModalComponent,
+    PruebasModalComponent,
+    SaludComponent
   ],
   entryComponents: [
     MascotaModalComponent,
@@ -51,7 +65,10 @@ import {MomentModule} from 'ngx-moment';
     SearchVacunaComponent,
     MedicamentosSearchComponent,
     MedicamentosModalComponent,
-    MedidaModalComponent
+    MedidaModalComponent,
+    AlergiasModalComponent,
+    PatologiasModalComponent,
+    PruebasModalComponent
   ],
   imports: [
     CommonModule,
