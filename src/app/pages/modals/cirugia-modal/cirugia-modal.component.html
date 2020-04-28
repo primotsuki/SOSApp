@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Nuevo registro</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="cirugiaForm" (ngSubmit)="OnSubmit()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Nombre Cirugia</ion-label>
+        <ion-input formControlName="nombre"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Fecha de cirugia:</ion-label>
+        <ion-datetime formControlName="fecha"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Tipo Cirugia</ion-label>
+        <ion-input formControlName="tipo_cirugia"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Precio</ion-label>
+        <ion-input formControlName="precio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Observaciones medicas</ion-label>
+        <ion-textarea formControlName="observaciones">
+
+        </ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Notas</ion-label>
+        <ion-textarea formControlName="notas">
+
+        </ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+      <ion-button expand="block" color="success" type="submit">Guardar Registro</ion-button>
+    </div>
+    <div class="ion-padding">
+      <ion-button expand="block" color="danger" (click)="close()">Cancelar</ion-button>
+    </div>
+  </form>
+</ion-content>

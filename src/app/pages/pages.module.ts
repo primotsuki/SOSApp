@@ -38,6 +38,11 @@ import { TestGenModalComponent } from './modals/test-gen-modal/test-gen-modal.co
 import { TestGenSearchComponent } from './modals/test-gen-search/test-gen-search.component';
 import { TestNumModalComponent } from './modals/test-num-modal/test-num-modal.component';
 import { TestNumSearchComponent } from './modals/test-num-search/test-num-search.component';
+import { CirugiasComponent } from './cirugias/cirugias.component';
+import { ComidasComponent } from './comidas/comidas.component';
+import { CirugiaModalComponent } from './modals/cirugia-modal/cirugia-modal.component';
+import { ComidasModalComponent } from './modals/comidas-modal/comidas-modal.component';
+import { ComidaSearchComponent } from './modals/comida-search/comida-search.component';
 import { SaludComponent } from './salud/salud.component';
 import { PipesModule } from '../pipes/pipes.module';
 import {MomentModule} from 'ngx-moment';
@@ -74,7 +79,12 @@ import {MomentModule} from 'ngx-moment';
     TestNumSearchComponent,
     TestGeneticoComponent,
     TestGenModalComponent,
-    TestGenSearchComponent
+    TestGenSearchComponent,
+    CirugiasComponent,
+    ComidasComponent,
+    ComidasModalComponent,
+    CirugiaModalComponent,
+    ComidaSearchComponent,
   ],
   entryComponents: [
     MascotaModalComponent,
@@ -92,7 +102,10 @@ import {MomentModule} from 'ngx-moment';
     TestGenSearchComponent,
     TestDiagModalComponent,
     TestNumModalComponent,
-    TestGenModalComponent
+    TestGenModalComponent,
+    ComidasModalComponent,
+    CirugiaModalComponent,
+    ComidaSearchComponent,
   ],
   imports: [
     CommonModule,

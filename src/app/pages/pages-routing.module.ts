@@ -17,6 +17,8 @@ import { SaludComponent } from './salud/salud.component';
 import { TestDiagnosticoComponent } from './test-diagnostico/test-diagnostico.component';
 import { TestGeneticoComponent } from './test-genetico/test-genetico.component';
 import { TestNumericoComponent } from './test-numerico/test-numerico.component';
+import { CirugiasComponent } from './cirugias/cirugias.component';
+import { ComidasComponent } from './comidas/comidas.component';
 
 const routes: Routes = [{
     path: '',
@@ -72,7 +74,13 @@ const routes: Routes = [{
         },{
           path: 'mascotas/:id/salud/numerico',
           component: TestNumericoComponent
-        },
+        },{
+          path:'mascotas/:id/salud/cirugia',
+          component: CirugiasComponent
+        },{
+          path: 'mascotas/:id/comida',
+          component: ComidasComponent
+        }
     ]
 }];
 
