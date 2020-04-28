@@ -26,6 +26,9 @@ export class SearchVacunaComponent implements OnInit {
     const texto = event.target.value;
     this.textoBuscar = texto;
   }
+  async close() {
+    await this.modalCtrl.dismiss();
+  }
   selectVacuna(elem: any) {
     this.modalCtrl.dismiss({
       id: elem.id,

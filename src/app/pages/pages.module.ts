@@ -29,6 +29,15 @@ import { PruebaDiagnosticoComponent } from './prueba-diagnostico/prueba-diagnost
 import { AlergiasModalComponent } from './modals/alergias-modal/alergias-modal.component';
 import { PatologiasModalComponent } from './modals/patologias-modal/patologias-modal.component';
 import { PruebasModalComponent } from './modals/pruebas-modal/pruebas-modal.component';
+import { TestDiagnosticoComponent } from './test-diagnostico/test-diagnostico.component';
+import { TestGeneticoComponent } from './test-genetico/test-genetico.component';
+import { TestNumericoComponent } from './test-numerico/test-numerico.component';
+import { TestDiagModalComponent } from './modals/test-diag-modal/test-diag-modal.component';
+import { TestDiagSearchComponent } from './modals/test-diag-search/test-diag-search.component';
+import { TestGenModalComponent } from './modals/test-gen-modal/test-gen-modal.component';
+import { TestGenSearchComponent } from './modals/test-gen-search/test-gen-search.component';
+import { TestNumModalComponent } from './modals/test-num-modal/test-num-modal.component';
+import { TestNumSearchComponent } from './modals/test-num-search/test-num-search.component';
 import { SaludComponent } from './salud/salud.component';
 import { PipesModule } from '../pipes/pipes.module';
 import {MomentModule} from 'ngx-moment';
@@ -56,7 +65,16 @@ import {MomentModule} from 'ngx-moment';
     AlergiasModalComponent,
     PatologiasModalComponent,
     PruebasModalComponent,
-    SaludComponent
+    SaludComponent,
+    TestDiagnosticoComponent,
+    TestDiagModalComponent,
+    TestDiagSearchComponent,
+    TestNumericoComponent,
+    TestNumModalComponent,
+    TestNumSearchComponent,
+    TestGeneticoComponent,
+    TestGenModalComponent,
+    TestGenSearchComponent
   ],
   entryComponents: [
     MascotaModalComponent,
@@ -68,7 +86,13 @@ import {MomentModule} from 'ngx-moment';
     MedidaModalComponent,
     AlergiasModalComponent,
     PatologiasModalComponent,
-    PruebasModalComponent
+    PruebasModalComponent,
+    TestDiagSearchComponent,
+    TestNumSearchComponent,
+    TestGenSearchComponent,
+    TestDiagModalComponent,
+    TestNumModalComponent,
+    TestGenModalComponent
   ],
   imports: [
     CommonModule,

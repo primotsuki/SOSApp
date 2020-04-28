@@ -14,6 +14,9 @@ import { AlergiasComponent } from './alergias/alergias.component';
 import { PatologiasComponent } from './patologias/patologias.component';
 import { PruebaDiagnosticoComponent } from './prueba-diagnostico/prueba-diagnostico.component';
 import { SaludComponent } from './salud/salud.component';
+import { TestDiagnosticoComponent } from './test-diagnostico/test-diagnostico.component';
+import { TestGeneticoComponent } from './test-genetico/test-genetico.component';
+import { TestNumericoComponent } from './test-numerico/test-numerico.component';
 
 const routes: Routes = [{
     path: '',
@@ -60,7 +63,16 @@ const routes: Routes = [{
         }, {
           path: 'mascotas/:id/salud/alergias',
           component: AlergiasComponent
-        }
+        },{
+          path: 'mascotas/:id/salud/diagnostico',
+          component: TestDiagnosticoComponent
+        },{
+          path: 'mascotas/:id/salud/genetico',
+          component: TestGeneticoComponent
+        },{
+          path: 'mascotas/:id/salud/numerico',
+          component: TestNumericoComponent
+        },
     ]
 }];
 

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Buscar test Numericos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar placeholder="Buscar test Numericos"
+                  animated
+                  (ionChange)="buscartest( $event )"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let numerico of numericos | filtro:textoBuscar" (click)="selectItem(numerico)">
+      <ion-label>
+        {{numerico.descripcion}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -20,12 +20,14 @@ export class MedicamentosSearchComponent implements OnInit {
     this.MedicamentoService.watch()
     .valueChanges.subscribe(data=>{
       this.medicamentos = data.data.allMedicamento;
-      console.log(this.medicamentos);
     });
   }
   buscarMedicamento( event ){
     const texto = event.target.value;
     this.textoBuscar = texto;
+  }
+  async close() {
+    await this.modalCtrl.dismiss();
   }
   selectMedicamento(elem: any) {
     this.modalCtrl.dismiss({

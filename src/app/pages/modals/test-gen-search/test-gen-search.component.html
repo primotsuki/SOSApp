@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Buscar test Genetico</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-searchbar placeholder="Buscar test Genetico"
+                  animated
+                  (ionChange)="buscartest( $event )"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let genetico of geneticos | filtro:textoBuscar" (click)="selectItem(genetico)">
+      <ion-label>
+        {{genetico.descripcion}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
