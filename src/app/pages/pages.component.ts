@@ -24,7 +24,7 @@ export class PagesComponent implements OnInit {
     },
     {
       title: 'Ley para la defensa de animales',
-      url: '/folder/Favorites',
+      url: '/pages/leyes',
       icon: 'library'
     },{
       title: 'Informacion',

@@ -44,6 +44,13 @@ import { CirugiaModalComponent } from './modals/cirugia-modal/cirugia-modal.comp
 import { ComidasModalComponent } from './modals/comidas-modal/comidas-modal.component';
 import { ComidaSearchComponent } from './modals/comida-search/comida-search.component';
 import { SaludComponent } from './salud/salud.component';
+import { LeyesListComponent } from './leyes-list/leyes-list.component';
+import { MediosComponent } from './leyes/medios/medios.component';
+import { CuidadosComponent } from './leyes/cuidados/cuidados.component';
+import { DerechosComponent } from './leyes/derechos/derechos.component';
+import { ObligacionesComponent } from './leyes/obligaciones/obligaciones.component';
+import { ProhibicionesComponent } from './leyes/prohibiciones/prohibiciones.component';
+import { TratosComponent } from './leyes/tratos/tratos.component';
 import { PipesModule } from '../pipes/pipes.module';
 import {MomentModule} from 'ngx-moment';
 @NgModule({
@@ -85,6 +92,13 @@ import {MomentModule} from 'ngx-moment';
     ComidasModalComponent,
     CirugiaModalComponent,
     ComidaSearchComponent,
+    LeyesListComponent,
+    MediosComponent,
+    CuidadosComponent,
+    DerechosComponent,
+    ObligacionesComponent,
+    ProhibicionesComponent,
+    TratosComponent
   ],
   entryComponents: [
     MascotaModalComponent,

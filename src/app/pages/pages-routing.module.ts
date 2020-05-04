@@ -19,6 +19,13 @@ import { TestGeneticoComponent } from './test-genetico/test-genetico.component';
 import { TestNumericoComponent } from './test-numerico/test-numerico.component';
 import { CirugiasComponent } from './cirugias/cirugias.component';
 import { ComidasComponent } from './comidas/comidas.component';
+import { LeyesListComponent } from './leyes-list/leyes-list.component';
+import { MediosComponent } from './leyes/medios/medios.component';
+import { CuidadosComponent } from './leyes/cuidados/cuidados.component';
+import { DerechosComponent } from './leyes/derechos/derechos.component';
+import { ObligacionesComponent } from './leyes/obligaciones/obligaciones.component';
+import { ProhibicionesComponent } from './leyes/prohibiciones/prohibiciones.component';
+import { TratosComponent } from './leyes/tratos/tratos.component';
 
 const routes: Routes = [{
     path: '',
@@ -80,6 +87,27 @@ const routes: Routes = [{
         },{
           path: 'mascotas/:id/comida',
           component: ComidasComponent
+        },{
+          path: 'leyes',
+          component: LeyesListComponent
+        },{
+          path: 'leyes/medios',
+          component: MediosComponent
+        },{
+          path: 'leyes/cuidados',
+          component: CuidadosComponent
+        },{
+          path: 'leyes/derechos',
+          component: DerechosComponent
+        },{
+          path: 'leyes/obligaciones',
+          component: ObligacionesComponent
+        },{
+          path: 'leyes/tratos',
+          component: TratosComponent
+        },{
+          path: 'leyes/prohibiciones',
+          component: ProhibicionesComponent
         }
     ]
 }];

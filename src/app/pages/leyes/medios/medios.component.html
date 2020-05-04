@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>inicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content [fullscreen]="true" fullscreen class="ion-padding"color="dark">
+  <ion-slides pager="true" [options]="slideOpts" style="height: 550px;">
+    <ion-slide>
+    <video id="background" width="600" height="600" (ended) ="finVideo()" autoplay>
+      <source src="assets/videos/medios.mp4">
+    </video>
+    
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 2</h1>
+    </ion-slide>
+    <ion-slide>
+      <h1>Slide 3</h1>
+    </ion-slide>
+  </ion-slides>
+</ion-content> -->
+<ion-content [fullscreen]="true" fullscreen class="ion-padding">
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide>
+      <!-- <video id="background" width="300" height="300" (ended) ="finVideo()" autoplay>
+        <source src="assets/videos/medios.mp4">
+      </video> -->
+     <h3>Medios de Comunicacion</h3>
+    </ion-slide>
+    <ion-slide>
+      <img src="assets/images/cuidado.jpg" />
+      <h3>Artículo 8. (MEDIOS DE COMUNICACIÓN)</h3>
+      <p>
+        Los medios de comunicación oral, escrito y televisivo, en el marco de su responsabilidad social, deberán difundir información educativa dirigida a la población en general, sobre el respeto y defensa de los animales.
+      </p>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
