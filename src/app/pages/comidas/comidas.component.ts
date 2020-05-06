@@ -56,5 +56,21 @@ export class ComidasComponent implements OnInit {
     });
     return await modal.present();
   }
+  async EditElem(comida: any) {
+    const modal = await this.modalCtrl.create({
+      component: ComidasModalComponent,
+      componentProps: {
+        edit: true,
+        comida: comida
+      }
+    });
+    modal.onWillDismiss().then(data=>{
+      let index = this.comidas.findIndex(elem =>{
+        return elem.id = data.data.id
+      })
+      this.comidas[index]=data.data;
+    });
+    return await modal.present();
+  }
 
 }

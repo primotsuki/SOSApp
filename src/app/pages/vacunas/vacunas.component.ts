@@ -35,6 +35,7 @@ export class VacunasComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: VacunasModalComponent,
       componentProps: {
+        edit: false,
         mascota_id: this.mascota_id
       }
     });
@@ -53,5 +54,20 @@ export class VacunasComponent implements OnInit {
     });
     return await modal.present();
   }
-
+  async editElem(vacuna: any) {
+    const modal = await this.modalCtrl.create({
+      component: VacunasModalComponent,
+      componentProps: {
+        edit: true,
+        vacuna: vacuna
+      }
+    });
+    modal.onWillDismiss().then(data=>{
+      let index = this.vacunasMascota.findIndex(elem =>{
+        return elem.id = data.data.id
+      })
+      this.vacunasMascota[index]=data.data;
+    });
+    return await modal.present();
+  }
 }

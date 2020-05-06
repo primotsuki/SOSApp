@@ -13,6 +13,10 @@
         <h3>{{comida.suministro.descripcion}}</h3>
         <p>{{comida.fecha_comida | DateFormat}}</p>
       </ion-label>
+      <ion-chip color="warning" slot="end" (click)="EditElem(comida)">
+        <ion-icon name="pencil">
+        </ion-icon>
+      </ion-chip>
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

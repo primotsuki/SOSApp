@@ -67,3 +67,24 @@ export class SubmitComidaMascota{
         })
     }
 }
+
+@Injectable({
+    providedIn: "root"
+})
+export class EditComidaMascota{
+    mutation = gql`
+        mutation EditComidaMascota($id: ID! $suministro_id: ID!, $fecha_comida: String!,$recordatorio: Boolean!, $medida: String!, $cantidad: Int!, $hora_recordatorio: String!, $notas: String!){
+            EditComidaMascota(id: $id, suministro_id: $suministro_id, fecha_comida: $fecha_comida,recordatorio: $recordatorio, medida: $medida,cantidad: $cantidad,hora_recordatorio: $hora_recordatorio, notas: $notas){
+                id
+            }
+        }
+    `;
+    constructor(private apollo: Apollo){}
+
+    EditComida(diagnostico: any) {
+        return this.apollo.mutate({
+            mutation: this.mutation,
+            variables: diagnostico
+        })
+    }
+}

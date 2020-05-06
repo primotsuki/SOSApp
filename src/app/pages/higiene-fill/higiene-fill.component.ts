@@ -57,13 +57,14 @@ export class HigieneFillComponent implements OnInit {
     const modal = await this.modalCtrl.create({
       component: HigieneModalComponent,
       componentProps: {
+        edit: false,
         mascota_id: this.mascota_id,
         manten_id: this.manten_id,
         manten_desc: this.manten.descripcion
       }
     });
     modal.onWillDismiss().then(data=>{
-
+      console.log(data.data);
     });
     return await modal.present();
   }
@@ -73,6 +74,21 @@ export class HigieneFillComponent implements OnInit {
     })
     const rem = this.mantenimientos.splice(index,1)[0];
     this.regVigente = rem;
-    this.regVigente.proximo = moment(new Date(parseInt(this.regVigente.proximo))).format('LL');
+  }
+  async editItem(){
+    const modal = await this.modalCtrl.create({
+      component: HigieneModalComponent,
+      componentProps: {
+        edit: true,
+        manten: this.regVigente,
+        mascota_id: this.mascota_id,
+        manten_id: this.manten_id,
+        manten_desc: this.manten.descripcion
+      }
+    })
+    modal.onWillDismiss().then(data=>{
+      console.log(data.data)
+    });
+    return await modal.present();
   }
 }

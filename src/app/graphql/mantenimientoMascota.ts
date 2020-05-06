@@ -66,3 +66,24 @@ export class submitMantenimiento{
         });
     }
 }
+@Injectable({
+    providedIn: "root"
+})
+export class EditMantenimiento{
+    mutation = gql`
+        mutation editMascota($id: ID!, $notas: String, $fecha_mantenimiento: String!, $recordatorio: Boolean!, $realizado: Boolean!, $proximo: String, $num_prog: Int, $intervalo_prog: String, $programado: Boolean!){
+            editMantenMascota(id: $id, notas: $notas, fecha_mantenimiento: $fecha_mantenimiento, recordatorio: $recordatorio,realizado: $realizado, proximo: $proximo, num_prog: $num_prog, intervalo_prog: $intervalo_prog, programado: $programado){
+                id
+            }
+        }
+    `;
+    constructor(private apollo: Apollo,
+                private userQuery: userGQL)
+                {}
+    editManten(mantenimiento:any) {
+        return this.apollo.mutate({
+            mutation: this.mutation,
+            variables: mantenimiento
+        });
+    }
+}

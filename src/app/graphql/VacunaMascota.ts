@@ -61,3 +61,24 @@ export class SubmitVacunaMascota{
         })
     }
 }
+
+@Injectable({
+    providedIn: "root"
+})
+export class EditVacunaMascota{
+    mutation = gql`
+        mutation editVacunaMascota($id: ID!, $vacuna_id: ID!, $fecha_vacuna: String!, $recordatorio: Boolean!, $realizado: Boolean!, $notas: String!){
+            EditVacunaMascota(id: $id, vacuna_id: $vacuna_id, fecha_vacuna: $fecha_vacuna, recordatorio: $recordatorio, realizado: $realizado, notas: $notas){
+                id
+            }
+        }
+    `;
+    constructor(private apollo: Apollo){}
+
+    EditVacuna(vacuna: any) {
+        return this.apollo.mutate({
+            mutation: this.mutation,
+            variables: vacuna
+        })
+    }
+}
