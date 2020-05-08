@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SubmitCirugias } from '../../../graphql/Cirugia';
+import { CirugiaService } from '../../../offline/cirugia';
 
 @Component({
   selector: 'app-cirugia-modal',
@@ -17,6 +18,7 @@ export class CirugiaModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private cirugiaService: SubmitCirugias,
+    private cirugiaLite: CirugiaService
   ) { }
 
   ngOnInit() {
@@ -39,20 +41,28 @@ export class CirugiaModalComponent implements OnInit {
     if(this.cirugiaForm.invalid){
       return;
     } else {
-      this.cirugiaService.submitCirugia({
+      let cir = {
         mascota_id: this.mascota_id,
         fecha: this.f.fecha.value,
         nombre: this.f.nombre.value,
         notas: this.f.notas.value,
         tipo_cirugia: this.f.tipo_cirugia.value,
         observaciones: this.f.observaciones.value,
-        precio: parseInt(this.f.precio.value)
-      })
-      .subscribe(async data=>{
-        await this.modalCtrl.dismiss({
-          new: data.data
+        precio: parseInt(this.f.precio.value),
+        submitted: false
+      };
+      this.cirugiaLite.newCirugia(cir)
+      .then(data=>{
+        this.modalCtrl.dismiss({
+          submitted: true
         })
-      });
+      })
+      // this.cirugiaService.submitCirugia( cir)
+      // .subscribe(async data=>{
+      //   await this.modalCtrl.dismiss({
+      //     new: data.data
+      //   })
+      // });
     }
   }
 

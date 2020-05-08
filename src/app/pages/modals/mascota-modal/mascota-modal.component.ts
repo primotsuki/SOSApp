@@ -3,8 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoMascota, TipoMascotaGQL } from '../../../graphql/tipomascota';
 import { submitMascotaService } from '../../../graphql/mascota';
-
-
+import { TipoMascotaService } from '../../../offline/TipoMascota';
+import { MascotaService } from '../../../offline/mascota';
 @Component({
   selector: 'app-mascota-modal',
   templateUrl: './mascota-modal.component.html',
@@ -20,7 +20,9 @@ export class MascotaModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private tipoQuery: TipoMascotaGQL,
-    private mascotaQuery: submitMascotaService
+    private mascotaQuery: submitMascotaService,
+    private tipoLite: TipoMascotaService,
+    private mascotaLite: MascotaService
   ) { }
 
   ngOnInit() {
@@ -47,15 +49,19 @@ export class MascotaModalComponent implements OnInit {
     this.tipoQuery.watch()
     .valueChanges.subscribe(data=>{
       this.tipos = data.data.AllTipo;
-      console.log(data);
-    })
+    }, err=>{
+      this.tipoLite.getAll()
+      .then(data=>{
+        this.tipos = data;
+      })
+    });
   }
   OnSubmit(){
     this.submitted = true;
     if(this.mascotaForm.invalid){
       return;
     } else {
-      this.mascotaQuery.submitMascota({
+      const mascota = {
         nombre: this.f.nombre.value,
         fecha_nacimiento: this.f.fecha_nacimiento.value,
         caracteristicas: this.f.caracteristicas.value,
@@ -63,12 +69,20 @@ export class MascotaModalComponent implements OnInit {
         mes_aprox: this.f.mes_aprox.value,
         year_aprox: this.f.year_aprox.value,
         tipo_id: this.f.tipo.value,
-        
-      }).subscribe(data=>{
+        submitted: false
+      };
+      this.mascotaLite.newMascota(mascota)
+      .then(data=>{
+        console.log(data);
         this.modalCtrl.dismiss({
-          completed:true
+          completed: true
         })
-      })
+      });
+      // this.mascotaQuery.submitMascota(mascota).subscribe(data=>{
+      //   this.modalCtrl.dismiss({
+      //     completed:true
+      //   })
+      // })
     }
   }
 }

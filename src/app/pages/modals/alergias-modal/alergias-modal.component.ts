@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SubmitAlergias } from '../../../graphql/alergias';
-
+import { AlergiaService } from '../../../offline/alergias';
 @Component({
   selector: 'app-alergias-modal',
   templateUrl: './alergias-modal.component.html',
@@ -17,6 +17,7 @@ export class AlergiasModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private alergiasService: SubmitAlergias,
+    private alergiaLite: AlergiaService
   ) { }
 
   ngOnInit() {
@@ -38,19 +39,27 @@ export class AlergiasModalComponent implements OnInit {
     if(this.alergiaForm.invalid){
       return;
     } else {
-      this.alergiasService.submitAlergia({
+      let alergia = {
         mascota_id: this.mascota_id,
         fecha_diagnostico: this.f.fecha_diagnostico.value,
         nombre: this.f.nombre.value,
         notas: this.f.notas.value,
         categoria: this.f.categoria.value,
         gravedad: this.f.gravedad.value
+      };
+      this.alergiaLite.newAlergia(alergia)
+      .then(data=>{
+        console.log(data);
+        this.modalCtrl.dismiss({
+          completed: true
+        });
       })
-      .subscribe(async data=>{
-        await this.modalCtrl.dismiss({
-          new: data.data
-        })
-      });
+      // this.alergiasService.submitAlergia(alergia)
+      // .subscribe(async data=>{
+      //   await this.modalCtrl.dismiss({
+      //     new: data.data
+      //   })
+      // });
     }
   }
 }

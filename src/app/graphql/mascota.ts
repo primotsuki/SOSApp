@@ -60,7 +60,7 @@ export class submitMascotaService{
             mutation: this.mutation,
             variables: {
                 ...mascota,
-                user_id: this.userQuery.currentUserValue.user_id
+                user_id: this.userQuery.currentUserValue.login.user_id
             }
         })
     }

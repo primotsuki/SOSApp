@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { CirugiaModalComponent } from '../modals/cirugia-modal/cirugia-modal.component';
 import { Cirugia, CirugiasGQL } from '../../graphql/Cirugia';
-
+import { CirugiaService } from '../../offline/cirugia';
 
 @Component({
   selector: 'app-cirugias',
@@ -17,19 +17,24 @@ export class CirugiasComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
-    private cirugiasQuery: CirugiasGQL
+    private cirugiasQuery: CirugiasGQL,
+    private CirugiaLite: CirugiaService
   ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(params=>{
       this.mascota_id = params.id;
     });
-    this.cirugiasQuery.watch({
-      mascota_id: this.mascota_id
-    })
-    .valueChanges.subscribe(data=>{
-      this.cirugias = data.data.CirugiaByMascota;
+    this.CirugiaLite.getAll(this.mascota_id)
+    .then(data=>{
+      this.cirugias = data;
     });
+    // this.cirugiasQuery.watch({
+    //   mascota_id: this.mascota_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //   this.cirugias = data.data.CirugiaByMascota;
+    // });
   }
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -39,15 +44,16 @@ export class CirugiasComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      this.cirugias.push({
-        id: data.data.new.saveCirugia.id,
-        nombre: data.data.new.saveCirugia.nombre,
-        fecha: data.data.new.saveCirugia.fecha,
-        notas: data.data.new.saveCirugia.notas,
-        tipo_cirugia: data.data.new.saveCirugia.tipo_cirugia,
-        precio: data.data.new.saveCirugia.precio,
-        observaciones: data.data.new.saveCirugia.observaciones
-      })
+      this.ngOnInit();
+      // this.cirugias.push({
+      //   id: data.data.new.saveCirugia.id,
+      //   nombre: data.data.new.saveCirugia.nombre,
+      //   fecha: data.data.new.saveCirugia.fecha,
+      //   notas: data.data.new.saveCirugia.notas,
+      //   tipo_cirugia: data.data.new.saveCirugia.tipo_cirugia,
+      //   precio: data.data.new.saveCirugia.precio,
+      //   observaciones: data.data.new.saveCirugia.observaciones
+      // })
     });
     return await modal.present();
   }

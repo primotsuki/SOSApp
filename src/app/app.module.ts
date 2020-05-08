@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApolloModule,APOLLO_OPTIONS } from 'apollo-angular'
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { SQLite } from '@ionic-native/sqlite/ngx';
+import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
   providers: [
     StatusBar,
     SplashScreen,
+    SQLite,
+    SQLitePorter,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: APOLLO_OPTIONS,
@@ -35,7 +39,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
         return {
           cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: "http://localhost:4000/graphql"
+            uri: "http://192.168.0.11:4000/graphql"
           })
         }
       },

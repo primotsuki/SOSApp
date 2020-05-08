@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { AuthGuard } from '../app/core/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth/login',
+    redirectTo: 'pages/inicio',
     pathMatch: 'full'
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   {
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
-    .then(m => m.PagesModule)
+    .then(m => m.PagesModule)// TO-DO: activar authGuard en produccion, canActivate: [AuthGuard]
   }
 ];
 

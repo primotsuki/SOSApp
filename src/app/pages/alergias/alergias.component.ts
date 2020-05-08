@@ -3,7 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { AlergiasModalComponent } from '../modals/alergias-modal/alergias-modal.component';
 import { Alergia, AlergiasGQL } from '../../graphql/alergias';
-
+import { AlergiaService } from '../../offline/alergias';
 @Component({
   selector: 'app-alergias',
   templateUrl: './alergias.component.html',
@@ -16,19 +16,24 @@ export class AlergiasComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
-    private alergiasQuery: AlergiasGQL
+    private alergiasQuery: AlergiasGQL,
+    private alergiaLite: AlergiaService
   ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(params=>{
       this.mascota_id = params.id;
     });
-    this.alergiasQuery.watch({
-      mascota_id: this.mascota_id
-    })
-    .valueChanges.subscribe(data=>{
-      this.alergias = data.data.AlergiaByMascota;
+    this.alergiaLite.getAll(this.mascota_id)
+    .then(data=>{
+      this.alergias = data;
     });
+    // this.alergiasQuery.watch({
+    //   mascota_id: this.mascota_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //   this.alergias = data.data.AlergiaByMascota;
+    // });
   }
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -38,14 +43,15 @@ export class AlergiasComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      this.alergias.push({
-        id: data.data.new.saveAlergia.id,
-        nombre: data.data.new.saveAlergia.nombre,
-        fecha_diagnostico: data.data.new.saveAlergia.fecha_diagnostico,
-        notas: data.data.new.saveAlergia.notas,
-        categoria: data.data.new.saveAlergia.categoria,
-        gravedad: data.data.new.saveAlergia.gravedad
-      })
+      this.ngOnInit();
+      // this.alergias.push({
+      //   id: data.data.new.saveAlergia.id,
+      //   nombre: data.data.new.saveAlergia.nombre,
+      //   fecha_diagnostico: data.data.new.saveAlergia.fecha_diagnostico,
+      //   notas: data.data.new.saveAlergia.notas,
+      //   categoria: data.data.new.saveAlergia.categoria,
+      //   gravedad: data.data.new.saveAlergia.gravedad
+      // })
     });
     return await modal.present();
   }
