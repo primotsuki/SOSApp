@@ -4,7 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ComidaSearchComponent } from '../comida-search/comida-search.component';
 import { SubmitComidaMascota, EditComidaMascota } from '../../../graphql/ComidaMascota';
 import * as moment from 'moment';
-
+import { ComidaMascotaService } from '../../../offline/Comida';
 @Component({
   selector: 'app-comidas-modal',
   templateUrl: './comidas-modal.component.html',
@@ -21,7 +21,8 @@ export class ComidasModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private comidaService: SubmitComidaMascota,
-    private editService: EditComidaMascota
+    private editService: EditComidaMascota,
+    private comidaLite: ComidaMascotaService
   ) { }
 
   ngOnInit() {
@@ -70,7 +71,7 @@ export class ComidasModalComponent implements OnInit {
       return;
     } else {
       if(this.edit){
-        this.editService.EditComida({
+        let comida = {
           id: this.comida.id,
           suministro_id: this.f.suministro_id.value,
           fecha_comida: this.f.fecha_comida.value,
@@ -78,24 +79,32 @@ export class ComidasModalComponent implements OnInit {
           cantidad: parseInt(this.f.cantidad.value),
           medida: this.f.medida.value,
           hora_recordatorio: this.f.hora_recordatorio.value,
-          notas: this.f.notas.value
-        }).subscribe(data=>{
-          this.modalCtrl.dismiss({
-          id: this.comida.id,
-          fecha_comida: moment(new Date(this.f.fecha_comida.value)).unix()*1000,
-          recordatorio: this.f.recordatorio.value,
-          cantidad: parseInt(this.f.cantidad.value),
-          medida: this.f.medida.value,
-          hora_recordatorio: this.f.hora_recordatorio.value,
           notas: this.f.notas.value,
-          suministro: {
-            id: this.f.suministro_id.value,
-            descripcion: this.f.suministro_name.value
-          }
+          submitted: false
+        };
+        this.comidaLite.updateComida(comida)
+        .then(data=>{
+          this.modalCtrl.dismiss({
+            submitted: true
           })
         })
+        // this.editService.EditComida(comida).subscribe(data=>{
+        //   this.modalCtrl.dismiss({
+        //   id: this.comida.id,
+        //   fecha_comida: moment(new Date(this.f.fecha_comida.value)).unix()*1000,
+        //   recordatorio: this.f.recordatorio.value,
+        //   cantidad: parseInt(this.f.cantidad.value),
+        //   medida: this.f.medida.value,
+        //   hora_recordatorio: this.f.hora_recordatorio.value,
+        //   notas: this.f.notas.value,
+        //   suministro: {
+        //     id: this.f.suministro_id.value,
+        //     descripcion: this.f.suministro_name.value
+        //   }
+        //   })
+        //})
       } else {
-        this.comidaService.submitComida({
+        let comida = {
           suministro_id: this.f.suministro_id.value,
           mascota_id: this.mascota_id,
           fecha_comida: this.f.fecha_comida.value,
@@ -103,16 +112,24 @@ export class ComidasModalComponent implements OnInit {
           cantidad: parseInt(this.f.cantidad.value),
           medida: this.f.medida.value,
           hora_recordatorio: this.f.hora_recordatorio.value,
-          notas: this.f.notas.value
-        }).subscribe(data=>{
+          notas: this.f.notas.value,
+          submitted: false
+        };
+        this.comidaLite.newComida(comida)
+        .then(data=>{
           this.modalCtrl.dismiss({
-            new: data.data,
-            suministro: {
-              id: this.f.suministro_id.value,
-              descripcion: this.f.suministro_name.value
-            }
+            submitted: true
           })
         });
+        // this.comidaService.submitComida().subscribe(data=>{
+        //   this.modalCtrl.dismiss({
+        //     new: data.data,
+        //     suministro: {
+        //       id: this.f.suministro_id.value,
+        //       descripcion: this.f.suministro_name.value
+        //     }
+        //   })
+        // });
       }
     }
   }

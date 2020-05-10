@@ -3,7 +3,7 @@ import {ComidasModalComponent} from '../modals/comidas-modal/comidas-modal.compo
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import {ComidaMascota, ComidaMascotaGQL } from '../../graphql/ComidaMascota';
-
+import { ComidaMascotaService } from '../../offline/Comida';
 
 @Component({
   selector: 'app-comidas',
@@ -17,19 +17,24 @@ export class ComidasComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
-    private comidaQuery: ComidaMascotaGQL
+    private comidaQuery: ComidaMascotaGQL,
+    private comidaLite: ComidaMascotaService
   ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(params=>{
       this.mascota_id = params.id;
     });
-    this.comidaQuery.watch({
-      mascota_id: this.mascota_id
+    this.comidaLite.getAll(this.mascota_id)
+    .then(data=>{
+      this.comidas = data;
     })
-    .valueChanges.subscribe(data=>{
-       this.comidas = data.data.ComidaByMascota;
-    })
+    // this.comidaQuery.watch({
+    //   mascota_id: this.mascota_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //    this.comidas = data.data.ComidaByMascota;
+    // })
   }
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -39,20 +44,21 @@ export class ComidasComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      console.log(data);
-      this.comidas.push({
-        id: data.data.new.saveComidaMascota.id,
-        fecha_comida: data.data.new.saveComidaMascota.fecha_comida,
-        notas: data.data.new.saveComidaMascota.notas,
-        cantidad: data.data.new.saveComidaMascota.cantidad,
-        medida: data.data.new.saveComidaMascota.medida,
-        recordatorio: data.data.new.saveComidaMascota.recordatorio,
-        hora_recordatorio: data.data.new.saveComidaMascota.hora_recordatorio,
-        suministro: {
-          id: data.data.suministro.id,
-          descripcion: data.data.suministro.descripcion
-        }
-      })
+      this.ngOnInit();
+      // console.log(data);
+      // this.comidas.push({
+      //   id: data.data.new.saveComidaMascota.id,
+      //   fecha_comida: data.data.new.saveComidaMascota.fecha_comida,
+      //   notas: data.data.new.saveComidaMascota.notas,
+      //   cantidad: data.data.new.saveComidaMascota.cantidad,
+      //   medida: data.data.new.saveComidaMascota.medida,
+      //   recordatorio: data.data.new.saveComidaMascota.recordatorio,
+      //   hora_recordatorio: data.data.new.saveComidaMascota.hora_recordatorio,
+      //   suministro: {
+      //     id: data.data.suministro.id,
+      //     descripcion: data.data.suministro.descripcion
+      //   }
+      // })
     });
     return await modal.present();
   }
@@ -65,10 +71,11 @@ export class ComidasComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      let index = this.comidas.findIndex(elem =>{
-        return elem.id = data.data.id
-      })
-      this.comidas[index]=data.data;
+      // let index = this.comidas.findIndex(elem =>{
+      //   return elem.id = data.data.id
+      // })
+      // this.comidas[index]=data.data;
+      this.ngOnInit();
     });
     return await modal.present();
   }

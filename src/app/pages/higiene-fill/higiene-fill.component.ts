@@ -4,6 +4,8 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { MantenimientoMascota, Mantenimiento } from '../../graphql/mantenimientoMascota';
 import { MantenGQL,Manten } from '../../graphql/mantenimiento';
+import { MantenimientoService } from '../../offline/grupo_mantenimiento';
+import { MantenimientoMascotaService } from '../../offline/mantenimiento';
 import * as moment from 'moment';
 
 @Component({
@@ -31,6 +33,8 @@ export class HigieneFillComponent implements OnInit {
     private route: ActivatedRoute,
     private mantenGQL: MantenimientoMascota,
     private mantenQuery: MantenGQL,
+    private MantenLite: MantenimientoService,
+    private MantenMascotaLite: MantenimientoMascotaService
   ) { }
 
   async ngOnInit() {
@@ -38,20 +42,31 @@ export class HigieneFillComponent implements OnInit {
       this.mascota_id = params.id;
       this.manten_id = params.higiene_id;
     });
-    await this.mantenGQL.watch({
-      mascota_id: this.mascota_id,
-      manten_id: this.manten_id
-    })
-    .valueChanges.subscribe(data=>{
-      this.mantenimientos = data.data.MantenMascota;
-      if(this.mantenimientos.length>0) 
+    this.MantenMascotaLite.getAll(this.mascota_id, this.manten_id)
+    .then(data=>{
+      this.mantenimientos = data;
+      if(this.mantenimientos.length>0)
         this.findVigente();
-    });
-    await this.mantenQuery.watch({
-      id: this.manten_id
-    }).valueChanges.subscribe(data=>{
-      this.manten = data.data.MantenimientoById;
-    });
+    })
+    // await this.mantenGQL.watch({
+    //   mascota_id: this.mascota_id,
+    //   manten_id: this.manten_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //   this.mantenimientos = data.data.MantenMascota;
+    //   if(this.mantenimientos.length>0) 
+    //     this.findVigente();
+    // });
+    this.MantenLite.getMantenimiento(this.manten_id)
+    .then(data=>{
+      this.manten = data;
+    })
+
+    // await this.mantenQuery.watch({
+    //   id: this.manten_id
+    // }).valueChanges.subscribe(data=>{
+    //   this.manten = data.data.MantenimientoById;
+    // });
   }
   async openModal() {
     const modal = await this.modalCtrl.create({
@@ -64,7 +79,7 @@ export class HigieneFillComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      console.log(data.data);
+      this.ngOnInit();
     });
     return await modal.present();
   }
@@ -87,7 +102,7 @@ export class HigieneFillComponent implements OnInit {
       }
     })
     modal.onWillDismiss().then(data=>{
-      console.log(data.data)
+      this.ngOnInit();
     });
     return await modal.present();
   }

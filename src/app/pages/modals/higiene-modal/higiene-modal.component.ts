@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { submitMantenimiento, EditMantenimiento } from '../../../graphql/mantenimientoMascota';
 import * as moment from 'moment';
 import {ActivatedRoute} from '@angular/router';
+import { MantenimientoMascotaService } from '../../../offline/mantenimiento';
 
 @Component({
   selector: 'app-higiene-modal',
@@ -26,7 +27,8 @@ export class HigieneModalComponent implements OnInit {
     private fb: FormBuilder,
     private mantenService: submitMantenimiento,
     private editService: EditMantenimiento,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private mantenimientoMascota: MantenimientoMascotaService
   ) { }
 
   ngOnInit() {
@@ -84,7 +86,7 @@ export class HigieneModalComponent implements OnInit {
       return;
     } else {
       if(this.edit) {
-        this.editService.editManten({
+        let manten = {
           id: this.manten.id,
           fecha_mantenimiento: this.f.fecha_mantenimiento.value,
           recordatorio: this.f.recordatorio.value,
@@ -94,13 +96,20 @@ export class HigieneModalComponent implements OnInit {
           intervalo_prog: this.f.intervalo_prog.value,
           programado: this.f.programado.value,
           notas: this.f.notas.value, 
-        }).subscribe(data=>{
+        };
+        this.mantenimientoMascota.updatemanten(manten)
+        .then(data=>{
           this.modalCtrl.dismiss({
-            new: data.data
-          })
-        });
+            submitted: true
+          });
+        })
+        // this.editService.editManten(manten).subscribe(data=>{
+        //   this.modalCtrl.dismiss({
+        //     new: data.data
+        //   })
+        // });
       } else {
-        this.mantenService.submitManten({
+        let manten = {
           fecha_mantenimiento: this.f.fecha_mantenimiento.value,
           recordatorio: this.f.recordatorio.value,
           realizado: this.f.realizado.value,
@@ -111,11 +120,18 @@ export class HigieneModalComponent implements OnInit {
           notas: this.f.notas.value,
           mascota_id: this.mascota_id,
          mantenimiento_id: this.manten_id 
-        }).subscribe(data=>{
+        };
+        this.mantenimientoMascota.newmanten(manten)
+        .then(data=>{
           this.modalCtrl.dismiss({
-            new: data.data
-          })
-        });
+            submitted: true
+          });
+        })
+        // this.mantenService.submitManten(manten).subscribe(data=>{
+        //   this.modalCtrl.dismiss({
+        //     new: data.data
+        //   })
+        // });
       }
     }
   }
