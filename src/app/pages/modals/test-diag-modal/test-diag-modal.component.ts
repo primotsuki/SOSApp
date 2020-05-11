@@ -3,6 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TestDiagSearchComponent } from '../test-diag-search/test-diag-search.component';
 import { SubmitDiagnosticoMascota } from '../../../graphql/DiagnosticoMascota';
+import { diagnosMascotaService } from '../../../offline/diagnosticoMascota';
 
 @Component({
   selector: 'app-test-diag-modal',
@@ -17,7 +18,8 @@ export class TestDiagModalComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private fb: FormBuilder,
-    private  diagnosService: SubmitDiagnosticoMascota
+    private  diagnosService: SubmitDiagnosticoMascota,
+    private diagnosicoLite: diagnosMascotaService
   ) { }
 
   ngOnInit() {
@@ -49,21 +51,28 @@ export class TestDiagModalComponent implements OnInit {
     if(this.diagnosticoform.invalid) {
       return;
     } else {
-      this.diagnosService.submitDiagnostico({
-        test_id: this.f.test_id.value,
+      let diagnostico= {
+        diagnostico_id: this.f.test_id.value,
         mascota_id: this.mascota_id,
         fecha_test: this.f.fecha_test.value,
         resultado: this.f.resultado.value,
         notas: this.f.notas.value
-      }).subscribe(data=>{
+      };
+      this.diagnosicoLite.newdiagnos(diagnostico)
+      .then(data=>{
         this.modalCtrl.dismiss({
-          new: data.data,
-          test: {
-            id: this.f.test_id.value,
-            descripcion: this.f.test_name.value
-          }
-        })
-      });
+          submitted: true
+        });
+      })
+      // this.diagnosService.submitDiagnostico(data).subscribe(data=>{
+      //   this.modalCtrl.dismiss({
+      //     new: data.data,
+      //     test: {
+      //       id: this.f.test_id.value,
+      //       descripcion: this.f.test_name.value
+      //     }
+      //   })
+      // });
     }
   }
 }

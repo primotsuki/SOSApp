@@ -32,7 +32,7 @@ export class MantenimientoMascotaService{
     async newmanten(manten: any){
         const data = [manten.notas, manten.fecha_mantenimiento,manten.recordatorio, manten.realizado,
                         manten.proximo,manten.num_prog, manten.intervalo_prog, manten.programado,manten.mascota_id,manten.mantenimiento_id, manten.submitted];
-        const sql = 'INSERT INTO mantenimiento_mascota (notas, fecha_mantenimiento, recordatorio, realizado, proximo, num_prog, intervalo_prog,programado, mascota_id,mantenimiento_id, submitted) values (?,?,?,?,?,?,?,?,?,?)'
+        const sql = 'INSERT INTO mantenimiento_mascota (notas, fecha_mantenimiento, recordatorio, realizado, proximo, num_prog, intervalo_prog,programado, mascota_id,mantenimiento_id, submitted) values (?,?,?,?,?,?,?,?,?,?,?)'
         return this.db.executeSQL(sql, data)
     }
     async updatemanten(manten: any) {

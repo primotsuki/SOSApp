@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MedicamentosSearchComponent } from '../medicamentos-search/medicamentos-search.component';
 import { SubmitMedicamentoMascota, EditMedicamentoMascota } from '../../../graphql/medicamentoMascota';
 import * as moment from 'moment';
+import { MedicamentoMascotaService } from '../../../offline/medicamentoMascota';
 @Component({
   selector: 'app-medicamentos-modal',
   templateUrl: './medicamentos-modal.component.html',
@@ -21,7 +22,8 @@ export class MedicamentosModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private  medicamentoService: SubmitMedicamentoMascota,
-    private EditService: EditMedicamentoMascota
+    private EditService: EditMedicamentoMascota,
+    private medicamentoLite: MedicamentoMascotaService
   ) { }
 
   ngOnInit() {
@@ -66,43 +68,57 @@ export class MedicamentosModalComponent implements OnInit {
       return;
     } else {
       if(this.edit){
-        this.EditService.EditMedicamento({
+        let medicamento = {
           id: this.medicamento.id,
           medicamento_id: this.f.medicamento_id.value,
           fecha_medicamento: this.f.fecha_medicamento.value,
           recordatorio: this.f.recordatorio.value,
           realizado: this.f.realizado.value,
           notas: this.f.notas.value
-        }).subscribe(data=>{
+        }
+        this.medicamentoLite.updatemedicamento(medicamento)
+        .then(data=>{
           this.modalCtrl.dismiss({
-            id: this.medicamento.id,
-            fecha_medicamento: moment(new Date(this.f.fecha_medicamento.value)).unix()*1000,
-            recordatorio: this.f.recordatorio.value,
-            realizado: this.f.realizado.value,
-            notas: this.f.notas.value,
-            medicamento:{
-              id: this.f.medicamento_id.value,
-              descripcion: this.f.medicamento_name.value
-            }
-          })
+            submitted: true
+          });
         })
+        // this.EditService.EditMedicamento(medicamento).subscribe(data=>{
+        //   this.modalCtrl.dismiss({
+        //     id: this.medicamento.id,
+        //     fecha_medicamento: moment(new Date(this.f.fecha_medicamento.value)).unix()*1000,
+        //     recordatorio: this.f.recordatorio.value,
+        //     realizado: this.f.realizado.value,
+        //     notas: this.f.notas.value,
+        //     medicamento:{
+        //       id: this.f.medicamento_id.value,
+        //       descripcion: this.f.medicamento_name.value
+        //     }
+        //   })
+        // })
       } else {
-        this.medicamentoService.submitmedicamento({
+        let medicamentos = {
           medicamento_id: this.f.medicamento_id.value,
           mascota_id: this.mascota_id,
           fecha_medicamento: this.f.fecha_medicamento.value,
           recordatorio: this.f.recordatorio.value,
           realizado: this.f.realizado.value,
           notas: this.f.notas.value
-        }).subscribe(data=>{
+        };
+        this.medicamentoLite.newMedicamento(medicamentos)
+        .then(data=>{
           this.modalCtrl.dismiss({
-            new: data.data,
-            medicamento: {
-              id: this.f.medicamento_id.value,
-              descripcion: this.f.medicamento_name.value
-            }
-          })
-        });
+            submitted: true
+          });
+        })
+        // this.medicamentoService.submitmedicamento(medicamentos).subscribe(data=>{
+        //   this.modalCtrl.dismiss({
+        //     new: data.data,
+        //     medicamento: {
+        //       id: this.f.medicamento_id.value,
+        //       descripcion: this.f.medicamento_name.value
+        //     }
+        //   })
+        // });
       }
     }
   }

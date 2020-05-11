@@ -3,6 +3,7 @@ import {MedicamentosModalComponent} from '../modals/medicamentos-modal/medicamen
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import {MedicamentoMascota,MedicamentosMascota} from '../../graphql/medicamentoMascota';
+import { MedicamentoMascotaService } from '../../offline/medicamentoMascota';
 
 @Component({
   selector: 'app-medicamentos',
@@ -16,19 +17,24 @@ export class MedicamentosComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
-    private medicionQuery: MedicamentosMascota
+    private medicionQuery: MedicamentosMascota,
+    private MedicamentoLite: MedicamentoMascotaService
   ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(params=>{
       this.mascota_id = params.id;
     });
-    this.medicionQuery.watch({
-      mascota_id: this.mascota_id
+    this.MedicamentoLite.getAll(this.mascota_id)
+    .then(data=>{
+      this.medicamentos = data;
     })
-    .valueChanges.subscribe(data=>{
-       this.medicamentos = data.data.medicamentoByMascota;
-    })
+    // this.medicionQuery.watch({
+    //   mascota_id: this.mascota_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //    this.medicamentos = data.data.medicamentoByMascota;
+    // })
   }
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -39,17 +45,18 @@ export class MedicamentosComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      this.medicamentos.push({
-        id: data.data.new.saveMedicamentoMascota.id,
-        fecha_medicamento: data.data.new.saveMedicamentoMascota.fecha_medicamento,
-        notas: data.data.new.saveMedicamentoMascota.notas,
-        recordatorio: data.data.new.saveMedicamentoMascota.recordatorio,
-        realizado: data.data.new.saveMedicamentoMascota.realizado,
-        medicamento: {
-          id: data.data.medicamento.id,
-          descripcion: data.data.medicamento.descripcion
-        }
-      })
+      this.ngOnInit();
+      // this.medicamentos.push({
+      //   id: data.data.new.saveMedicamentoMascota.id,
+      //   fecha_medicamento: data.data.new.saveMedicamentoMascota.fecha_medicamento,
+      //   notas: data.data.new.saveMedicamentoMascota.notas,
+      //   recordatorio: data.data.new.saveMedicamentoMascota.recordatorio,
+      //   realizado: data.data.new.saveMedicamentoMascota.realizado,
+      //   medicamento: {
+      //     id: data.data.medicamento.id,
+      //     descripcion: data.data.medicamento.descripcion
+      //   }
+      // })
     });
     return await modal.present();
   }
@@ -62,10 +69,11 @@ export class MedicamentosComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      let index = this.medicamentos.findIndex(elem =>{
-        return elem.id = data.data.id
-      })
-      this.medicamentos[index]=data.data;
+      this.ngOnInit()
+      // let index = this.medicamentos.findIndex(elem =>{
+      //   return elem.id = data.data.id
+      // })
+      // this.medicamentos[index]=data.data;
     });
     return await modal.present();
   }

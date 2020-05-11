@@ -4,10 +4,10 @@ import { Injectable, Inject } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class CirugiaService {
+export class PatologiaService {
     constructor(private db: DBService){}
     async getAll(id: number) {
-        const sql = `SELECT * FROM cirugia where mascota_id = ${id}`;
+        const sql = `SELECT * FROM patologia where mascota_id = ${id}`;
         const res = await this.db.executeSQL(sql);
         let items: any[] =[];
         if(res.rows.length >0){
@@ -17,10 +17,10 @@ export class CirugiaService {
         }
         return items;
     }
-    async newCirugia(cirugia: any) {
-        const data =[cirugia.tipo_cirugia, cirugia.fecha, cirugia.nombre, cirugia.precio,
-                    cirugia.observaciones, cirugia.notas, cirugia.mascota_id, cirugia.submitted]
-        const sql = 'INSERT INTO cirugia (tipo_cirugia,fecha,nombre,precio,observaciones,notas,mascota_id,submitted) values(?,?,?,?,?,?,?,?)';
+    async newpatologia(patologia: any) {
+        const data =[patologia.nombre, patologia.gravedad, patologia.acciones, patologia.notas,
+                    patologia.fecha, patologia.mascota_id, patologia.submitted]
+        const sql = 'INSERT INTO patologia (nombre,gravedad,acciones,notas,fecha,mascota_id,submitted) values(?,?,?,?,?,?,?)';
         return this.db.executeSQL(sql, data);
     }
 }

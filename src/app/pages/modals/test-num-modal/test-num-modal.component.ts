@@ -4,7 +4,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TestNumSearchComponent } from '../test-num-search/test-num-search.component';
 import { SubmitNumericoMascota } from '../../../graphql/NumericoMascota';
 import { TipoMedidaGQL, TipoMedicion } from '../../../graphql/tipoMedida';
-
+import { numericoMascotaService } from '../../../offline/NumericoMascota';
+import {UnidadesService } from '../../../offline/unidades';
 @Component({
   selector: 'app-test-num-modal',
   templateUrl: './test-num-modal.component.html',
@@ -20,7 +21,9 @@ export class TestNumModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private tipoQuery: TipoMedidaGQL,
     private fb: FormBuilder,
-    private numericoService: SubmitNumericoMascota
+    private numericoService: SubmitNumericoMascota,
+    private numericoLite: numericoMascotaService,
+    private unidesLite: UnidadesService
   ) { }
 
   async ngOnInit() {
@@ -34,13 +37,17 @@ export class TestNumModalComponent implements OnInit {
       margen_alto:['',Validators.required],
       notas:['']
     });
-    await this.tipoQuery.watch({
-      id: 4
-    }).valueChanges
-    .subscribe(data=>{
-      const tipoMedicion = data.data.tipoMediciones[0];
-      this.unidades = tipoMedicion.unidades;
+    this.unidesLite.getAll(4)
+    .then(data=>{
+      this.unidades = data.unidades;
     });
+    // await this.tipoQuery.watch({
+    //   id: 4
+    // }).valueChanges
+    // .subscribe(data=>{
+    //   const tipoMedicion = data.data.tipoMediciones[0];
+    //   this.unidades = tipoMedicion.unidades;
+    // });
   }
   get f() {return this.numericoform.controls};
 
@@ -62,8 +69,8 @@ export class TestNumModalComponent implements OnInit {
     if(this.numericoform.invalid) {
       return;
     } else {
-      this.numericoService.submitNumerico({
-        test_id: this.f.test_id.value,
+      let numerico ={
+        numerico_id: this.f.test_id.value,
         mascota_id: this.mascota_id,
         fecha_test: this.f.fecha_test.value,
         valor: parseInt(this.f.valor.value),
@@ -71,16 +78,23 @@ export class TestNumModalComponent implements OnInit {
         margen_bajo: parseInt(this.f.margen_bajo.value),
         unidad_id: this.f.unidad_id.value,
         notas: this.f.notas.value
-      }).subscribe( async data=>{
+      };
+      this.numericoLite.newnumerico(numerico)
+      .then(data=>{
         this.modalCtrl.dismiss({
-          new: data.data,
-          test: {
-            id: this.f.test_id.value,
-            descripcion: this.f.test_name.value
-          },
-          unidad: await this.unidades.filter(elem=>{return elem.id ==this.f.unidad_id.value})[0]
+          submitted: true
         })
-      });
+      })
+      // this.numericoService.submitNumerico(numerico).subscribe( async data=>{
+      //   this.modalCtrl.dismiss({
+      //     new: data.data,
+      //     test: {
+      //       id: this.f.test_id.value,
+      //       descripcion: this.f.test_name.value
+      //     },
+      //     unidad: await this.unidades.filter(elem=>{return elem.id ==this.f.unidad_id.value})[0]
+      //   })
+      // });
     }
   }
 

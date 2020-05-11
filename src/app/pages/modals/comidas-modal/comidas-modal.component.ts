@@ -30,7 +30,7 @@ export class ComidasModalComponent implements OnInit {
       this.comidaform = this.fb.group({
         suministro_id: [this.comida.suministro.id],
         suministro_name: [this.comida.suministro.descripcion],
-        fecha_comida: [moment(parseInt(this.comida.fecha_comida)).format('YYYY-MM-DD')],
+        fecha_comida: [moment(this.comida.fecha_comida).format('YYYY-MM-DD')],
         recordatorio: [this.comida.recordatorio],
         cantidad: [this.comida.cantidad],
         medida:[this.comida.medida],

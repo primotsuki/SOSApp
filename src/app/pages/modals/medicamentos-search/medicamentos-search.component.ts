@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { medicamentoGQL, Medicamento } from '../../../graphql/medicamento';
 import { ModalController } from '@ionic/angular';
+import { MedicamentosService } from '../../../offline/medicamentos';
 
 @Component({
   selector: 'app-medicamentos-search',
@@ -13,13 +14,20 @@ export class MedicamentosSearchComponent implements OnInit {
   textoBuscar = '';
   constructor(
     private MedicamentoService: medicamentoGQL,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private MedicamentoLite: MedicamentosService
   ) { }
 
   ngOnInit() {
     this.MedicamentoService.watch()
     .valueChanges.subscribe(data=>{
       this.medicamentos = data.data.allMedicamento;
+      this.MedicamentoLite.saveData(this.medicamentos);
+    }, error=>{
+      this.MedicamentoLite.getAll()
+      .then(data=>{
+        this.medicamentos = data;
+      })
     });
   }
   buscarMedicamento( event ){

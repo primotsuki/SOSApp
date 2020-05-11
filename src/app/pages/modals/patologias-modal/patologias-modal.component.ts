@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { SubmitPatologias } from '../../../graphql/patologias';
+import { PatologiaService } from '../../../offline/patologias';
 
 @Component({
   selector: 'app-patologias-modal',
@@ -18,6 +19,7 @@ export class PatologiasModalComponent implements OnInit {
     private modalCtrl: ModalController,
     private fb: FormBuilder,
     private patologiasService: SubmitPatologias,
+    private patologiaLite: PatologiaService
   ) { }
 
   ngOnInit() {
@@ -39,19 +41,26 @@ export class PatologiasModalComponent implements OnInit {
     if(this.patologiaForm.invalid){
       return;
     } else {
-      this.patologiasService.submitPatologia({
+      let patologia = {
         mascota_id: this.mascota_id,
         fecha: this.f.fecha.value,
         nombre: this.f.nombre.value,
         notas: this.f.notas.value,
         acciones: this.f.acciones.value,
         gravedad: this.f.gravedad.value
-      })
-      .subscribe(async data=>{
-        await this.modalCtrl.dismiss({
-          new: data.data
-        })
+      };
+      this.patologiaLite.newpatologia(patologia)
+      .then(data=>{
+        this.modalCtrl.dismiss({
+          submitted: true
+        });
       });
+      // this.patologiasService.submitPatologia(patologia)
+      // .subscribe(async data=>{
+      //   await this.modalCtrl.dismiss({
+      //     new: data.data
+      //   })
+      // });
     }
   }
 }

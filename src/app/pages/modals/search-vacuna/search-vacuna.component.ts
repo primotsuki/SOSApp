@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VacunaGQL, Vacuna } from '../../../graphql/vacuna';
 import { ModalController } from '@ionic/angular';
+import { VacunaService } from '../../../offline/vacuna';
 
 @Component({
   selector: 'app-search-vacuna',
@@ -13,13 +14,20 @@ export class SearchVacunaComponent implements OnInit {
   textoBuscar = '';
   constructor(
     private vacunaService: VacunaGQL,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private vacunaLite: VacunaService
   ) { }
 
   ngOnInit() {
     this.vacunaService.watch()
     .valueChanges.subscribe(data=>{
       this.vacunas = data.data.allVacuna;
+      this.vacunaLite.saveData(this.vacunas);
+    }, err=>{
+      this.vacunaLite.getAll()
+      .then(data=>{
+        this.vacunas = data;
+      })
     });
   }
   buscarVacuna( event ){

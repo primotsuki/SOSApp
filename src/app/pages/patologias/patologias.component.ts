@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { PatologiasModalComponent } from '../modals/patologias-modal/patologias-modal.component';
 import { Patologia, PatologiasGQL } from '../../graphql/patologias';
+import { PatologiaService } from '../../offline/patologias';
 
 @Component({
   selector: 'app-patologias',
@@ -16,19 +17,24 @@ export class PatologiasComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
-    private patologiaQuery: PatologiasGQL
+    private patologiaQuery: PatologiasGQL,
+    private patologiaLite: PatologiaService
   ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(params=>{
       this.mascota_id = params.id;
     });
-    this.patologiaQuery.watch({
-      mascota_id: this.mascota_id
+    this.patologiaLite.getAll(this.mascota_id)
+    .then(data=>{
+      this.patologias = data;
     })
-    .valueChanges.subscribe(data=>{
-      this.patologias = data.data.PatologiaByMascota;
-    });
+    // this.patologiaQuery.watch({
+    //   mascota_id: this.mascota_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //   this.patologias = data.data.PatologiaByMascota;
+    // });
   }
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -38,14 +44,15 @@ export class PatologiasComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      this.patologias.push({
-        id: data.data.new.savePatologia.id,
-        nombre: data.data.new.savePatologia.nombre,
-        fecha: data.data.new.savePatologia.fecha,
-        notas: data.data.new.savePatologia.notas,
-        acciones: data.data.new.savePatologia.acciones,
-        gravedad: data.data.new.savePatologia.gravedad
-      })
+      this.ngOnInit();
+      // this.patologias.push({
+      //   id: data.data.new.savePatologia.id,
+      //   nombre: data.data.new.savePatologia.nombre,
+      //   fecha: data.data.new.savePatologia.fecha,
+      //   notas: data.data.new.savePatologia.notas,
+      //   acciones: data.data.new.savePatologia.acciones,
+      //   gravedad: data.data.new.savePatologia.gravedad
+      // })
     });
     return await modal.present();
   }

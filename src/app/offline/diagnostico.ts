@@ -4,10 +4,10 @@ import { Injectable } from '@angular/core';
 @Injectable({
     providedIn: 'root'
 })
-export class MedicamentosService {
+export class DiagnosticoService {
     constructor (private db: DBService){}
     async getAll() {
-        const sql = 'SELECT * FROM medicamentos';
+        const sql = 'SELECT * FROM test_diagnosticos';
         const res = await this.db.executeSQL(sql);
         let items: any[] = [];
         if(res.rows.length >0){
@@ -20,10 +20,10 @@ export class MedicamentosService {
         }
         return items;
     }
-    async saveData(medicamentos: any[]) {
-        for(var i=0; i<medicamentos.length;i++){
-            let data =[medicamentos[i].id,medicamentos[i].descripcion]
-            const sql = `INSERT OR REPLACE INTO medicamentos (id, descripcion) values (?,?)`;
+    async saveData(diagnosticos: any[]) {
+        for(var i=0; i<diagnosticos.length;i++){
+            let data =[diagnosticos[i].id,diagnosticos[i].descripcion]
+            const sql = `INSERT OR REPLACE INTO test_diagnosticos (id, descripcion) values (?,?)`;
             return this.db.executeSQL(sql,data);
         }
     }

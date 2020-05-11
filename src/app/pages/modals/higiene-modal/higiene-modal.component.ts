@@ -34,10 +34,10 @@ export class HigieneModalComponent implements OnInit {
   ngOnInit() {
     if(this.edit){
       this.higieneForm = this.fb.group({
-        fecha_mantenimiento: [moment(parseInt(this.manten.fecha_mantenimiento)).format('YYYY-MM-DD')],
+        fecha_mantenimiento: [moment(this.manten.fecha_mantenimiento).format('YYYY-MM-DD')],
         recordatorio: [this.manten.recordatorio],
         realizado: [this.manten.realizado],
-        proximo: [moment(parseInt(this.manten.proximo)).format('YYYY-MM-DD')],
+        proximo: [moment(this.manten.proximo).format('YYYY-MM-DD')],
         num_prog:[this.manten.num_prog.toString()],
         intervalo_prog:[this.manten.intervalo_prog],
         programado:[this.manten.programado],
@@ -95,7 +95,8 @@ export class HigieneModalComponent implements OnInit {
           num_prog: parseInt(this.f.num_prog.value),
           intervalo_prog: this.f.intervalo_prog.value,
           programado: this.f.programado.value,
-          notas: this.f.notas.value, 
+          notas: this.f.notas.value,
+          submitted: false
         };
         this.mantenimientoMascota.updatemanten(manten)
         .then(data=>{
@@ -119,7 +120,8 @@ export class HigieneModalComponent implements OnInit {
           programado: this.f.programado.value,
           notas: this.f.notas.value,
           mascota_id: this.mascota_id,
-         mantenimiento_id: this.manten_id 
+          mantenimiento_id: this.manten_id,
+          submitted: false 
         };
         this.mantenimientoMascota.newmanten(manten)
         .then(data=>{

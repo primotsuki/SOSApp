@@ -3,7 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { TestGenSearchComponent } from '../test-gen-search/test-gen-search.component';
 import { SubmitGeneticoMascota } from '../../../graphql/GeneticoMascota';
-
+import { geneticoMascotaService } from '../../../offline/GeneticoMascota';
 
 @Component({
   selector: 'app-test-gen-modal',
@@ -18,7 +18,8 @@ export class TestGenModalComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private fb: FormBuilder,
-    private  geneticoService: SubmitGeneticoMascota
+    private  geneticoService: SubmitGeneticoMascota,
+    private geneticoLite: geneticoMascotaService
   ) { }
 
   ngOnInit() {
@@ -50,21 +51,29 @@ export class TestGenModalComponent implements OnInit {
     if(this.geneticoform.invalid) {
       return;
     } else {
-      this.geneticoService.submitGenetico({
+      let genetico = {
         test_id: this.f.test_id.value,
         mascota_id: this.mascota_id,
         fecha_test: this.f.fecha_test.value,
         resultado: this.f.resultado.value,
-        notas: this.f.notas.value
-      }).subscribe(data=>{
+        notas: this.f.notas.value,
+        submitted: true
+      };
+      this.geneticoLite.newgenetico(genetico)
+      .then(data=>{
         this.modalCtrl.dismiss({
-          new: data.data,
-          test: {
-            id: this.f.test_id.value,
-            descripcion: this.f.test_name.value
-          }
+          submitted: true
         })
       });
+      // this.geneticoService.submitGenetico(genetico).subscribe(data=>{
+      //   this.modalCtrl.dismiss({
+      //     new: data.data,
+      //     test: {
+      //       id: this.f.test_id.value,
+      //       descripcion: this.f.test_name.value
+      //     }
+      //   })
+      // });
     }
   }
 

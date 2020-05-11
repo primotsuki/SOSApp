@@ -3,6 +3,7 @@ import {TestDiagModalComponent} from '../modals/test-diag-modal/test-diag-modal.
 import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import {DiagnosticoMascota, DiagnosticoMascotaGQL } from '../../graphql/DiagnosticoMascota';
+import { diagnosMascotaService } from '../../offline/diagnosticoMascota';
 
 @Component({
   selector: 'app-test-diagnostico',
@@ -16,19 +17,24 @@ export class TestDiagnosticoComponent implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private route: ActivatedRoute,
-    private diagQuery: DiagnosticoMascotaGQL
+    private diagQuery: DiagnosticoMascotaGQL,
+    private diagnosticoLite: diagnosMascotaService
   ) { }
 
   async ngOnInit() {
     await this.route.params.subscribe(params=>{
       this.mascota_id = params.id;
     });
-    this.diagQuery.watch({
-      mascota_id: this.mascota_id
+    this.diagnosticoLite.getAll(this.mascota_id)
+    .then(data=>{
+      this.diagnosticos = data;
     })
-    .valueChanges.subscribe(data=>{
-       this.diagnosticos = data.data.testDiagByMascota;
-    })
+    // this.diagQuery.watch({
+    //   mascota_id: this.mascota_id
+    // })
+    // .valueChanges.subscribe(data=>{
+    //    this.diagnosticos = data.data.testDiagByMascota;
+    // })
   }
   async openModal(){
     const modal = await this.modalCtrl.create({
@@ -38,17 +44,18 @@ export class TestDiagnosticoComponent implements OnInit {
       }
     });
     modal.onWillDismiss().then(data=>{
-      console.log(data);
-      this.diagnosticos.push({
-        id: data.data.new.saveTestDiagByMascota.id,
-        fecha_test: data.data.new.saveTestDiagByMascota.fecha_test,
-        notas: data.data.new.saveTestDiagByMascota.notas,
-        resultado: data.data.new.saveTestDiagByMascota.resultado,
-        test: {
-          id: data.data.test.id,
-          descripcion: data.data.test.descripcion
-        }
-      })
+      this.ngOnInit();
+      // console.log(data);
+      // this.diagnosticos.push({
+      //   id: data.data.new.saveTestDiagByMascota.id,
+      //   fecha_test: data.data.new.saveTestDiagByMascota.fecha_test,
+      //   notas: data.data.new.saveTestDiagByMascota.notas,
+      //   resultado: data.data.new.saveTestDiagByMascota.resultado,
+      //   test: {
+      //     id: data.data.test.id,
+      //     descripcion: data.data.test.descripcion
+      //   }
+      // })
     });
     return await modal.present();
   }
