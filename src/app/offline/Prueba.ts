@@ -19,8 +19,8 @@ export class pruebaService {
     }
     async newprueba(prueba: any) {
         const data =[prueba.descripcion, prueba.notas, prueba.fecha_prueba,
-                    prueba.mascota_id, prueba.submitted]
-        const sql = 'INSERT INTO prueba_diagnosticos (descripcion,notas,fecha_prueba,mascota_id,submitted) values(?,?,?,?,?)';
+                    prueba.mascota_id, prueba.submitted, new Date(), new Date()]
+        const sql = 'INSERT INTO prueba_diagnosticos (descripcion,notas,fecha_prueba,mascota_id,submitted, created_at, updated_at) values(?,?,?,?,?,?,?)';
         return this.db.executeSQL(sql, data);
     }
 }

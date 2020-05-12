@@ -14,6 +14,7 @@ export class numericoMascotaService{
         const res = await this.db.executeSQL(sql);
         let items: any[] = [];
         if(res.rows.length >0) {
+            console.log(res.rows.item(0));
             for(var i=0; i < res.rows.length;i++){
                 items.push({
                     id: res.rows.item(i).id,
@@ -27,7 +28,7 @@ export class numericoMascotaService{
                     },
                     unidad: {
                         id: res.rows.item(i).unidad_id,
-                        unidad: res.rows.item(id).unidad
+                        unidad: res.rows.item(i).unidad
                     }
                 })
             }
@@ -35,9 +36,9 @@ export class numericoMascotaService{
         return items;
     }
     async newnumerico(numerico: any){
-        const data = [numerico.notas, numerico.resultado, numerico.margen_bajo, numerico.margen_alto,
-                        ,numerico.fecha_test,numerico.numerico_id,numerico.unidad_id, numerico.mascota_id,numerico.submitted];
-        const sql = 'INSERT INTO test_num_mascota (notas, resultado,margen_bajo,margen_alto, fecha_test,numerico_id,unidad_id, mascota_id, submitted) values (?,?,?,?,?,?,?,?,?)';
+        const data = [numerico.notas, numerico.valor, numerico.margen_bajo, numerico.margen_alto,
+                        numerico.fecha_test,numerico.numerico_id,numerico.unidad_id, numerico.mascota_id,numerico.submitted];
+        const sql = 'INSERT INTO test_num_mascota (notas, valor,margen_bajo,margen_alto, fecha_test,numerico_id,unidad_id, mascota_id, submitted) values (?,?,?,?,?,?,?,?,?)';
         return this.db.executeSQL(sql, data)
     }
     async updatenumerico(numerico: any) {

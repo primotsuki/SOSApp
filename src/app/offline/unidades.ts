@@ -10,7 +10,7 @@ export class UnidadesService{
     async getAll(id:number) {
         const sql = `SELECT tipo_medicions.descripcion, unidad_medidas.*
         FROM tipo_medicions LEFT OUTER JOIN unidad_medidas ON tipo_medicions.id = unidad_medidas.medida_id
-        WHERE tipo_medicions.id = 4 = ${id}`;
+        WHERE unidad_medidas.medida_id = ${id}`;
         const res = await this.db.executeSQL(sql);
         let items : any ={};
         let sub_items: any[] = [];

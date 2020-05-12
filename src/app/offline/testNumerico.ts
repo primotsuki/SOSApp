@@ -8,8 +8,17 @@ export class NumericoService {
     constructor (private db: DBService){}
     async getAll() {
         const sql = 'SELECT * FROM test_numericos';
-        const result = await this.db.executeSQL(sql);
-        return result.rows;
+        const res = await this.db.executeSQL(sql);
+        let items: any[] = [];
+        if(res.rows.length >0){
+            for (var i=0; i<res.rows.length;i++){
+                items.push({
+                    id: res.rows.item(i).id,
+                    descripcion: res.rows.item(i).descripcion
+                })
+            }
+        }
+        return items;
     }
     async saveData(diagnosticos: any[]) {
         for(var i=0; i<diagnosticos.length;i++){

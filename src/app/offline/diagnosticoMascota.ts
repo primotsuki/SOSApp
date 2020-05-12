@@ -31,7 +31,7 @@ export class diagnosMascotaService{
     async newdiagnos(diagnos: any){
         const data = [diagnos.notas, diagnos.resultado
                         ,diagnos.fecha_test,diagnos.diagnostico_id, diagnos.mascota_id,diagnos.submitted];
-        const sql = 'INSERT INTO test_diag_mascota (notas, resultado, fecha_test,diagnostico_id, mascota_id, submitted) values (?,?,?,?,?,?,?)';
+        const sql = 'INSERT INTO test_diag_mascota (notas, resultado, fecha_test,diagnostico_id, mascota_id, submitted) values (?,?,?,?,?,?)';
         return this.db.executeSQL(sql, data)
     }
     async updatediagnos(diagnos: any) {

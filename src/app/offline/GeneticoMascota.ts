@@ -8,7 +8,7 @@ export class geneticoMascotaService{
     constructor(private db: DBService){}
 
     async getAll(id:number) {
-        const sql = `SELECT test_gen_mascota.*, test_geneticos.descripcion FROM test_gen_mascota LEFT OUTER JOIN test_geneticos ON test_gen_mascota.genetico_id = test_genticos.id
+        const sql = `SELECT test_gen_mascota.*, test_geneticos.descripcion FROM test_gen_mascota LEFT OUTER JOIN test_geneticos ON test_gen_mascota.genetico_id = test_geneticos.id
         WHERE mascota_id = ${id}`;
         const res = await this.db.executeSQL(sql);
         let items: any[] = [];
@@ -31,7 +31,7 @@ export class geneticoMascotaService{
     async newgenetico(genetico: any){
         const data = [genetico.notas, genetico.resultado
                         ,genetico.fecha_test,genetico.genetico_id, genetico.mascota_id,genetico.submitted];
-        const sql = 'INSERT INTO test_gen_mascota (notas, resultado, fecha_test,genetico_id, mascota_id, submitted) values (?,?,?,?,?,?,?)';
+        const sql = 'INSERT INTO test_gen_mascota (notas, resultado, fecha_test,genetico_id, mascota_id, submitted) values (?,?,?,?,?,?)';
         return this.db.executeSQL(sql, data)
     }
     async updategenetico(genetico: any) {

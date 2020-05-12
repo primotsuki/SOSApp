@@ -77,13 +77,17 @@ export class TestNumModalComponent implements OnInit {
         margen_alto: parseInt(this.f.margen_alto.value),
         margen_bajo: parseInt(this.f.margen_bajo.value),
         unidad_id: this.f.unidad_id.value,
-        notas: this.f.notas.value
+        notas: this.f.notas.value,
+        submitted: false
       };
       this.numericoLite.newnumerico(numerico)
       .then(data=>{
         this.modalCtrl.dismiss({
           submitted: true
         })
+      })
+      .catch(err=>{
+        console.log(err);
       })
       // this.numericoService.submitNumerico(numerico).subscribe( async data=>{
       //   this.modalCtrl.dismiss({
