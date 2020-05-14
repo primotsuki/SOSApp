@@ -8,7 +8,7 @@ export class MascotaService{
     constructor(private db: DBService){}
 
     async getAll() {
-        const sql = 'SELECT * FROM mascota INNER JOIN tipo_mascota on mascota.tipo_id = tipo_mascota.id';
+        const sql = 'SELECT mascota.*, tipo_mascota.descripcion FROM mascota LEFT OUTER JOIN tipo_mascota on mascota.tipo_id = tipo_mascota.id';
         const res = await this.db.executeSQL(sql);
         let items: any[] = [];
         if(res.rows.length >0) {
@@ -21,6 +21,7 @@ export class MascotaService{
                     color: res.rows.item(i).color,
                     mes_aprox: res.rows.item(i).mes_aprox,
                     year_aprox: res.rows.item(i).year_aprox,
+                    photo_uri: res.rows.item(i).photo_uri,
                     submitted: res.rows.item(i).submitted,
                     tipo: {
                         id:  res.rows.item(i).tipo_id,
@@ -31,10 +32,29 @@ export class MascotaService{
         }
         return items;
     }
+    async getById(id: number) {
+        const sql = `SELECT * FROM  mascota LEFT OUTER JOIN tipo_mascota on mascota.tipo_id = tipo_mascota.id WHERE mascota.id = ${id}`;
+        const res = await this.db.executeSQL(sql);
+        return {
+            id: res.rows.item(0).id,
+                    nombre: res.rows.item(0).nombre,
+                    caracteristicas: res.rows.item(0).caracteristicas,
+                    fecha_nacimiento: res.rows.item(0).fecha_nacimiento,
+                    color: res.rows.item(0).color,
+                    mes_aprox: res.rows.item(0).mes_aprox,
+                    year_aprox: res.rows.item(0).year_aprox,
+                    photo_uri: res.rows.item(0).photo_uri,
+                    submitted: res.rows.item(0).submitted,
+                    tipo: {
+                        id:  res.rows.item(0).tipo_id,
+                        descripcion: res.rows.item(0).descripcion
+                    }
+        }
+    }
     async newMascota(mascota: any){
         const data = [mascota.nombre, mascota.caracteristicas, mascota.fecha_nacimiento, mascota.color
-                        ,mascota.mes_aprox, mascota.year_aprox, mascota.tipo_id, mascota.sumitted];
-        const sql = 'INSERT INTO mascota (nombre, caracteristicas, fecha_nacimiento, color, mes_aprox, year_aprox, tipo_id, submitted) values (?,?,?,?,?,?,?,?)'
+                        ,mascota.mes_aprox, mascota.year_aprox, mascota.tipo_id,mascota.photo_uri, mascota.sumitted];
+        const sql = 'INSERT INTO mascota (nombre, caracteristicas, fecha_nacimiento, color, mes_aprox, year_aprox, tipo_id,photo_uri, submitted) values (?,?,?,?,?,?,?,?,?)'
         return this.db.executeSQL(sql, data)
     }
     async updateMascota(mascota: any) {

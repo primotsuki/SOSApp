@@ -39,7 +39,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
         return {
           cache: new InMemoryCache(),
           link: httpLink.create({
-            uri: "http://192.168.0.11:4000/graphql"
+            uri: "http://localhost:4000/graphql"
           })
         }
       },

@@ -14,7 +14,6 @@ export class numericoMascotaService{
         const res = await this.db.executeSQL(sql);
         let items: any[] = [];
         if(res.rows.length >0) {
-            console.log(res.rows.item(0));
             for(var i=0; i < res.rows.length;i++){
                 items.push({
                     id: res.rows.item(i).id,

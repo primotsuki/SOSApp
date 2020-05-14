@@ -4,17 +4,19 @@ import gql from 'graphql-tag';
 import { userGQL } from './user';
 
 export interface Mascota {
-    id: number,
-    nombre: string,
-    caracteristicas: string,
-    fecha_nacimiento: string,
-    color: string,
-    mes_aprox: number,
-    year_aprox: number,
-    user_id: number,
-    tipo: {
-        id: number,
-        descripcion: string
+    id?: number,
+    nombre?: string,
+    caracteristicas?: string,
+    fecha_nacimiento?: string,
+    color?: string,
+    mes_aprox?: number,
+    year_aprox?: number,
+    user_id?: number,
+    photo_uri?: string,
+    photo_data?: string,
+    tipo?: {
+        id?: number,
+        descripcion?: string
     }
 }
 export interface Response {

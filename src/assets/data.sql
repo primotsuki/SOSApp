@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `medicamentos` (
-  `id` INTEGER AUTO_INCREMENT PRIMARY KEY ,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT ,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -10,7 +10,7 @@ INSERT OR IGNORE INTO `medicamentos` (`id`, `descripcion`, `created_at`, `update
 	(3, 'dioxidol', '2020-04-24 10:52:27', '2020-04-24 10:52:28');
 
 CREATE TABLE IF NOT EXISTS `alergia` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `nombre` varchar(255),
   `gravedad` varchar(255),
   `categoria` varchar(255),
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS `alergia` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `cirugia` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `tipo_cirugia` varchar(255),
   `fecha` datetime,
   `nombre` varchar(255),
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `cirugia` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `comida_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `fecha_comida` datetime,
   `cantidad` integer,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `comida_mascota` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `grupo_mantenimientos` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -53,7 +53,7 @@ INSERT OR IGNORE INTO `grupo_mantenimientos` (`id`, `descripcion`, `created_at`,
 	(2, 'Limpieza', '2020-04-21 18:33:11', '2020-04-21 18:33:12');
 
 CREATE TABLE IF NOT EXISTS `mantenimientos` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255) ,
   `created_at` datetime,
   `updated_at` datetime,
@@ -72,7 +72,7 @@ INSERT OR IGNORE INTO `mantenimientos` (`id`, `descripcion`, `created_at`, `upda
 	(10, 'Correa y Collar', '2020-04-21 19:11:20', '2020-04-21 19:11:21', 2);
 
 CREATE TABLE IF NOT EXISTS `mantenimiento_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `fecha_mantenimiento` datetime,
   `recordatorio` integer,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `mantenimiento_mascota` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `nombre` varchar(255),
   `caracteristicas` varchar(255),
   `fecha_nacimiento` date,
@@ -100,10 +100,11 @@ CREATE TABLE IF NOT EXISTS `mascota` (
   `user_id` integer,
   `tipo_id` integer,
   `unidad_id` integer,
+  `photo_uri` varchar(255),
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `medicamento_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `fecha_medicamento` datetime,
   `recordatorio` integer,
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `medicamento_mascota` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `medicion_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `valor` integer,
   `fecha_medicion` datetime,
@@ -127,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `medicion_mascota` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `patologia` (
-  `id` integer AUTO_INCREMENT,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `nombre` varchar(255),
   `gravedad` varchar(255),
   `acciones` varchar(255),
@@ -139,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `patologia` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `prueba_diagnosticos` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255) DEFAULT NULL,
   `notas` varchar(255) DEFAULT NULL,
   `fecha_prueba` datetime NOT NULL,
@@ -149,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `prueba_diagnosticos` (
   `submitted` integer
 );
 CREATE TABLE IF NOT EXISTS `suministros` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -157,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `suministros` (
 INSERT OR IGNORE INTO `suministros` (`id`, `descripcion`, `created_at`, `updated_at`) VALUES
 	(1, 'dog Chow', '2020-04-28 11:56:47', '2020-04-28 11:56:48');
 CREATE TABLE IF NOT EXISTS `test_diagnosticos` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -168,7 +169,7 @@ INSERT OR IGNORE INTO `test_diagnosticos` (`id`, `descripcion`, `created_at`, `u
 	(3, 'Coronavirus', '2020-04-27 18:51:41', '2020-04-27 18:51:42');
 
 CREATE TABLE IF NOT EXISTS `test_diag_mascota` (
-  `id` integer AUTO_INCREMENT,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `resultado` varchar(255),
   `fecha_test` datetime,
@@ -180,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `test_diag_mascota` (
 );
 
 CREATE TABLE IF NOT EXISTS `test_geneticos` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -191,7 +192,7 @@ INSERT OR IGNORE INTO `test_geneticos` (`id`, `descripcion`, `created_at`, `upda
 	(2, 'Canine Fucosidosis', '2020-04-27 19:26:20', '2020-04-27 19:26:21');
 
 CREATE TABLE IF NOT EXISTS `test_gen_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `resultado` varchar(255),
   `fecha_test` datetime,
@@ -203,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `test_gen_mascota` (
 );
 
 CREATE TABLE IF NOT EXISTS `test_numericos` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -215,7 +216,7 @@ INSERT or IGNORE INTO `test_numericos` (`id`, `descripcion`, `created_at`, `upda
 	(3, 'Amylase (serum)', '2020-04-27 20:24:54', '2020-04-27 20:24:55');
 
 CREATE TABLE IF NOT EXISTS `test_num_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `valor` integer,
   `margen_bajo` integer,
@@ -230,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `test_num_mascota` (
 );
 
 CREATE TABLE IF NOT EXISTS `tipo_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL
@@ -242,7 +243,7 @@ INSERT OR IGNORE INTO `tipo_mascota` (`id`, `descripcion`, `created_at`, `update
 	(3, 'Hamster', '2020-04-16 20:55:29', '2020-04-16 20:55:32');
 
 CREATE TABLE IF NOT EXISTS `tipo_medicions` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -254,7 +255,7 @@ INSERT OR IGNORE INTO `tipo_medicions` (`id`, `descripcion`, `created_at`, `upda
 	(4, 'Test Numerico', '2020-04-27 19:55:51', '2020-04-27 19:55:52');
 
 CREATE TABLE IF NOT EXISTS `unidad_medidas` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `unidad` varchar(255),
   `created_at` datetime,
   `updated_at` datetime,
@@ -272,7 +273,7 @@ INSERT OR IGNORE INTO `unidad_medidas` (`id`, `unidad`, `created_at`, `updated_a
 	(9, 'Centigrade', '2020-04-27 19:56:55', '2020-04-27 19:56:56', 4);
 
 CREATE TABLE IF NOT EXISTS `vacunas` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `descripcion` varchar(255),
   `created_at` datetime,
   `updated_at` datetime
@@ -283,7 +284,7 @@ INSERT OR IGNORE INTO `vacunas` (`id`, `descripcion`, `created_at`, `updated_at`
 	(2, 'rabia canina', '2020-04-22 11:40:14', '2020-04-22 11:40:15');
 
 CREATE TABLE IF NOT EXISTS `vacunas_mascota` (
-  `id` integer AUTO_INCREMENT PRIMARY KEY,
+  `id` INTEGER PRIMARY KEY AUTOINCREMENT,
   `notas` varchar(255),
   `fecha_vacuna` datetime,
   `recordatorio` integer,

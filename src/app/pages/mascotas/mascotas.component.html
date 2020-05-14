@@ -10,6 +10,24 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
+      <ion-col size="6">
+        <ion-img src="{{mascota.photo_data}}">
+        </ion-img>
+      </ion-col>
+      <ion-col size="6">
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input [(ngModel)]="mascota.nombre" disabled></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Tipo</ion-label>
+            <ion-input [(ngModel)]="mascota.tipo.descripcion" disabled></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col size="4">
         <ion-card [routerLink]="['limpieza']">
             <ion-icon name="bandage" size="large"></ion-icon>

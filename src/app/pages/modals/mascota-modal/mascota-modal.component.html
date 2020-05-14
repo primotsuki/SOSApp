@@ -9,28 +9,44 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+  <ion-fab vertical="top" horizontal="start" >
+    <ion-fab-button color="success" (click)="AddPhoto()">
+      <ion-icon name="camera-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <form [formGroup]="mascotaForm" (ngSubmit)="OnSubmit()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <img src="{{photo.webPath}}" />
+        </ion-col>
+        <ion-col size="6">
+          <ion-list lines="full" class="ion-no-margin ion-no-padding">
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input type="text" formControlName="nombre"></ion-input>
+              <ng-container *ngIf="submitted && f.nombre.errors">
+                <p class="error-message"> *El campo es requerido</p>
+              </ng-container>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Color</ion-label>
+              <ion-input type="text" formControlName="color"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Tipo</ion-label>
+              <ion-select interface="popover" formControlName="tipo">
+                <ion-select-option *ngFor="let tipo of tipos" value="{{tipo.id}}">{{tipo.descripcion}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
-      <ion-item>
-        <ion-label position="stacked">Nombre</ion-label>
-        <ion-input type="text" formControlName="nombre"></ion-input>
-        <ng-container *ngIf="submitted && f.nombre.errors">
-          <p class="error-message"> *El campo es requerido</p>
-        </ng-container>
-      </ion-item>
       <ion-item>
         <ion-label position="stacked">Caracteristicas</ion-label>
         <ion-input type="text" formControlName="caracteristicas"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Tipo</ion-label>
-        <ion-select formControlName="tipo">
-          <ion-select-option *ngFor="let tipo of tipos" value="{{tipo.id}}">{{tipo.descripcion}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Color</ion-label>
-        <ion-input type="text" formControlName="color"></ion-input>
       </ion-item>
       <ion-item>
         <ion-select placeholder="Seleccione una opcion" formControlName="fecha_exacta">
