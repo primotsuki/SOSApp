@@ -43,7 +43,10 @@ export class InicioComponent implements OnInit {
   }
   async openModal() {
     const modal = await this.modalCtrl.create({
-      component: MascotaModalComponent
+      component: MascotaModalComponent,
+      componentProps:{
+        edit: false
+      }
     });
     modal.onWillDismiss().then(data=>{
         this.ngOnInit();

@@ -10,6 +10,11 @@
 <ion-content [fullscreen]="true">
   <ion-grid>
     <ion-row>
+      <ion-fab vertical="top" horizontal="start" >
+        <ion-fab-button color="success" (click)="editMascota()">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
       <ion-col size="6">
         <ion-img src="{{mascota.photo_data}}">
         </ion-img>

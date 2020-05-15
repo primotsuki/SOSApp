@@ -31,6 +31,13 @@ export class CameraService {
       webviewPath:Capacitor.convertFileSrc(savedFile.uri)
     }
   }
+  public async deletePicture(photoUri: string) {
+    const deleted = await Filesystem.deleteFile({
+      path: photoUri,
+      directory: FilesystemDirectory.Data
+    })
+    return deleted;
+  }
   public async readAsBase64(cameraPhoto: CameraPhoto){
     const file = await Filesystem.readFile({
       path: cameraPhoto.path
@@ -38,7 +45,7 @@ export class CameraService {
     return file.data;
   }
   public async loadSavedPhoto(photoUri: string){
-    const readFile = await await Filesystem.readFile({
+    const readFile = await Filesystem.readFile({
       path: photoUri,
       directory: FilesystemDirectory.Data
     })

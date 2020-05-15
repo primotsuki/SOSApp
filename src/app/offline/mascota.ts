@@ -33,7 +33,7 @@ export class MascotaService{
         return items;
     }
     async getById(id: number) {
-        const sql = `SELECT * FROM  mascota LEFT OUTER JOIN tipo_mascota on mascota.tipo_id = tipo_mascota.id WHERE mascota.id = ${id}`;
+        const sql = `SELECT mascota.*, tipo_mascota.descripcion FROM  mascota LEFT OUTER JOIN tipo_mascota on mascota.tipo_id = tipo_mascota.id WHERE mascota.id = ${id}`;
         const res = await this.db.executeSQL(sql);
         return {
             id: res.rows.item(0).id,
@@ -58,9 +58,10 @@ export class MascotaService{
         return this.db.executeSQL(sql, data)
     }
     async updateMascota(mascota: any) {
+        console.log('la mascota que se edita');
         const data = [mascota.nombre, mascota.caracteristicas, mascota.fecha_nacimiento, mascota.color
-            ,mascota.mes_aprox, mascota.year_aprox, mascota.user_id, mascota.unidad_id, false];
-        const sql = `UPDATE mascota set nombre=?, caracteristicas=?, fecha_nacimiento=?, color=?, mes_aprox=?, year_aprox=? user_id=?, tipo_id=?, unidad_id=? where id = ${mascota.id}`;
+            ,mascota.mes_aprox, mascota.year_aprox, mascota.tipo_id, mascota.photo_uri, mascota.submitted];
+        const sql = `UPDATE mascota set nombre=?, caracteristicas=?, fecha_nacimiento=?, color=?, mes_aprox=?, year_aprox=?, tipo_id=?,photo_uri=?, submitted=? where id = ${mascota.id}`;
         return this.db.executeSQL(sql,data);
     }
 }
