@@ -27,3 +27,7 @@ ion-slides {
     line-height: 1.5;
     color: var(--ion-color-step-600, #60646b);
   }
+  .rounded-photo {
+    border-radius: 50% !important;
+    overflow: hidden;
+    }

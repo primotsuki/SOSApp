@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SlideOpts } from '../slide';
 
 @Component({
   selector: 'app-cuidados',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CuidadosComponent implements OnInit {
 
+  slideOpts: any;
   constructor() { }
-
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.slideOpts = SlideOpts;
+  }
+  
 }
