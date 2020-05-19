@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { CubeOpts } from '../slide';
 @Component({
   selector: 'app-obligaciones',
   templateUrl: './obligaciones.component.html',
@@ -7,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObligacionesComponent implements OnInit {
 
+  slideOpts: any;
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.slideOpts = CubeOpts;
+  }
 
 }
