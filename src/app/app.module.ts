@@ -15,7 +15,7 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { SQLite } from '@ionic-native/sqlite/ngx';
 import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
-
+import { LocalNotifications, } from '@ionic-native/local-notifications/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,6 +32,7 @@ import { SQLitePorter } from '@ionic-native/sqlite-porter/ngx';
     SplashScreen,
     SQLite,
     SQLitePorter,
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: APOLLO_OPTIONS,

@@ -58,7 +58,6 @@ export class MascotaService{
         return this.db.executeSQL(sql, data)
     }
     async updateMascota(mascota: any) {
-        console.log('la mascota que se edita');
         const data = [mascota.nombre, mascota.caracteristicas, mascota.fecha_nacimiento, mascota.color
             ,mascota.mes_aprox, mascota.year_aprox, mascota.tipo_id, mascota.photo_uri, mascota.submitted];
         const sql = `UPDATE mascota set nombre=?, caracteristicas=?, fecha_nacimiento=?, color=?, mes_aprox=?, year_aprox=?, tipo_id=?,photo_uri=?, submitted=? where id = ${mascota.id}`;

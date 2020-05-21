@@ -30,7 +30,7 @@ export class VacunasModalComponent implements OnInit {
       this.vacunaform = this.fb.group({
         vacuna_id: [this.vacuna.vacuna.id],
         vacuna_name: [this.vacuna.vacuna.descripcion],
-        fecha_vacuna: [moment(parseInt(this.vacuna.fecha_vacuna)).format('YYYY-MM-DD')],
+        fecha_vacuna: [moment(this.vacuna.fecha_vacuna).format('YYYY-MM-DD')],
         recordatorio: [this.vacuna.recordatorio],
         realizado: [this.vacuna.recordatorio],
         notas:[this.vacuna.notas]

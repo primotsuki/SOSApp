@@ -31,7 +31,7 @@ export class MedicamentosModalComponent implements OnInit {
       this.medicamentoform = this.fb.group({
         medicamento_id: [this.medicamento.medicamento.id],
         medicamento_name: [this.medicamento.medicamento.descripcion],
-        fecha_medicamento: [moment(parseInt(this.medicamento.fecha_medicamento)).format('YYYY-MM-DD')],
+        fecha_medicamento: [moment(this.medicamento.fecha_medicamento).format('YYYY-MM-DD')],
         recordatorio: [this.medicamento.recordatorio],
         realizado: [this.medicamento.realizado],
         notas:[this.medicamento.notas]

@@ -7,7 +7,7 @@ import { Injectable, Inject } from '@angular/core';
 export class MantenimientoService {
     constructor(private db: DBService){}
     async getMantenimiento(id: number) {
-        const sql = `SELECT * FROM suministros WHERE id = ${id}`;
+        const sql = `SELECT * FROM mantenimientos WHERE id = ${id}`;
         const res = await this.db.executeSQL(sql);
         let items: any = {};
         if(res.rows.length >0){

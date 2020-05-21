@@ -6,6 +6,7 @@ import { MantenimientoMascota, Mantenimiento } from '../../graphql/mantenimiento
 import { MantenGQL,Manten } from '../../graphql/mantenimiento';
 import { MantenimientoService } from '../../offline/grupo_mantenimiento';
 import { MantenimientoMascotaService } from '../../offline/mantenimiento';
+import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
 import * as moment from 'moment';
 
 @Component({
@@ -34,7 +35,8 @@ export class HigieneFillComponent implements OnInit {
     private mantenGQL: MantenimientoMascota,
     private mantenQuery: MantenGQL,
     private MantenLite: MantenimientoService,
-    private MantenMascotaLite: MantenimientoMascotaService
+    private MantenMascotaLite: MantenimientoMascotaService,
+    private localNotifications: LocalNotifications
   ) { }
 
   async ngOnInit() {
@@ -87,8 +89,10 @@ export class HigieneFillComponent implements OnInit {
     const index = await this.mantenimientos.findIndex(elem=>{
       return !elem.realizado;
     })
-    const rem = this.mantenimientos.splice(index,1)[0];
+    const rem = await this.mantenimientos.splice(index,1)[0];
     this.regVigente = rem;
+    console.log(this.mantenimientos);
+    console.log(this.regVigente);
   }
   async editItem(){
     const modal = await this.modalCtrl.create({
@@ -102,16 +106,19 @@ export class HigieneFillComponent implements OnInit {
       }
     })
     modal.onWillDismiss().then(data=>{
-      this.ngOnInit();
     });
     return await modal.present();
   }
+  async finishAction (id: number) {
+    this.MantenMascotaLite.finishManten(id)
+    .then(data=>{
+      this.ngOnInit();
+    })
+  }
   doRefresh(event) {
-    console.log('Begin async operation');
-
     setTimeout(() => {
-      console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
   }
+
 }

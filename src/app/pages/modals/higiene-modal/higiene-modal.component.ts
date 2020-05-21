@@ -5,7 +5,8 @@ import { submitMantenimiento, EditMantenimiento } from '../../../graphql/manteni
 import * as moment from 'moment';
 import {ActivatedRoute} from '@angular/router';
 import { MantenimientoMascotaService } from '../../../offline/mantenimiento';
-
+import {LocalNotifications} from '@ionic-native/local-notifications/ngx';
+import { ELocalNotificationTriggerUnit } from "@ionic-native/local-notifications/index";
 @Component({
   selector: 'app-higiene-modal',
   templateUrl: './higiene-modal.component.html',
@@ -28,7 +29,8 @@ export class HigieneModalComponent implements OnInit {
     private mantenService: submitMantenimiento,
     private editService: EditMantenimiento,
     private route: ActivatedRoute,
-    private mantenimientoMascota: MantenimientoMascotaService
+    private mantenimientoMascota: MantenimientoMascotaService,
+    private localNotifications: LocalNotifications
   ) { }
 
   ngOnInit() {
@@ -85,6 +87,19 @@ export class HigieneModalComponent implements OnInit {
     if(this.higieneForm.invalid) {
       return;
     } else {
+      let frecuency: ELocalNotificationTriggerUnit = ELocalNotificationTriggerUnit.MINUTE;
+          switch (this.f.intervalo_prog.value){
+            case 'dias':
+              frecuency = ELocalNotificationTriggerUnit.DAY;
+              break;
+            case 'semanas':
+              frecuency = ELocalNotificationTriggerUnit.WEEK;
+              break;
+            case 'meses':
+              frecuency = ELocalNotificationTriggerUnit.MONTH;
+              break;
+
+          }
       if(this.edit) {
         let manten = {
           id: this.manten.id,
@@ -100,6 +115,10 @@ export class HigieneModalComponent implements OnInit {
         };
         this.mantenimientoMascota.updatemanten(manten)
         .then(data=>{
+          this.localNotifications.schedule({
+            title: 'Se requiere la tarea '+this.manten_desc,
+            trigger: { every: frecuency}
+          });
           this.modalCtrl.dismiss({
             submitted: true
           });
@@ -125,6 +144,10 @@ export class HigieneModalComponent implements OnInit {
         };
         this.mantenimientoMascota.newmanten(manten)
         .then(data=>{
+          this.localNotifications.schedule({
+            title: 'Se requiere la tarea '+this.manten_desc,
+            trigger: { every: frecuency}
+          });
           this.modalCtrl.dismiss({
             submitted: true
           });

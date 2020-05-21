@@ -10,7 +10,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-list>
+  <ion-list *ngIf="regVigente.num_prog != NULL">
     <ion-item-divider>
       <ion-label>AGENDA</ion-label>
       <ion-button slot="end" color="primary" (click)="editItem()">
@@ -29,11 +29,11 @@
     <ion-item-divider>
       <ion-label>REGISTROS ANTERIORES</ion-label>
     </ion-item-divider>
-    <ion-item>
+    <ion-item *ngFor="let manten of mantenimientos">
       <ion-avatar slot=start>
         <ion-icon name="home" size="large"></ion-icon>
       </ion-avatar>
-      <ion-label>04-04-2020</ion-label>
+      <ion-label>{{manten.fecha_mantenimiento | DateFormat}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

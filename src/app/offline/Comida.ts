@@ -8,7 +8,7 @@ export class ComidaMascotaService{
     constructor(private db: DBService){}
 
     async getAll(id:number) {
-        const sql = `SELECT * FROM comida_mascota LEFT OUTER JOIN suministros ON comida_mascota.suministro_id = suministros.id where mascota_id = ${id}`;
+        const sql = `SELECT comida_mascota.*, suministros.descripcion FROM comida_mascota LEFT OUTER JOIN suministros ON comida_mascota.suministro_id = suministros.id where mascota_id = ${id}`;
         const res = await this.db.executeSQL(sql);
         let items: any[] = [];
         if(res.rows.length >0) {

@@ -18,8 +18,8 @@ export class VacunaMascotaService{
                     id: res.rows.item(i).id,
                     notas: res.rows.item(i).notas,
                     fecha_vacuna: res.rows.item(i).fecha_vacuna,
-                    recordatorio: (res.rows.item(i).recordatorio=1)? true:false,
-                    realizado: (res.rows.item(i).realizado=1)? true:false,
+                    recordatorio: (res.rows.item(i).recordatorio==1)? true:false,
+                    realizado: (res.rows.item(i).realizado==1)? true:false,
                     submitted: res.rows.item(i).submitted,
                     vacuna: {
                         id:  res.rows.item(i).vacuna_id,
@@ -39,7 +39,7 @@ export class VacunaMascotaService{
     async updatevacuna(vacuna: any) {
         const data =[vacuna.notas, vacuna.fecha_vacuna
             ,vacuna.recordatorio,vacuna.realizado, vacuna.mascota_id,vacuna.vacuna_id ,vacuna.submitted];
-        const sql = `UPDATE vacuna_mascota set notas=?, fecha_vacuna=?, recordatorio=?,realizado=?, mascota_id=?,vacuna_id=?, submitted=? where id = ${vacuna.id}`;
+        const sql = `UPDATE vacunas_mascota set notas=?, fecha_vacuna=?, recordatorio=?,realizado=?, mascota_id=?,vacuna_id=?, submitted=? where id = ${vacuna.id}`;
         return this.db.executeSQL(sql,data);
     }
 }
