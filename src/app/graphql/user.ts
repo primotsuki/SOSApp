@@ -3,6 +3,7 @@ import {  Apollo } from "apollo-angular";
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import gql from "graphql-tag";
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: "root"
@@ -11,7 +12,8 @@ export class userGQL {
     private currentUserSubject: BehaviorSubject<any>;
     public currentUser: Observable<any>;
 
-    constructor(private apollo: Apollo) {
+    constructor(private apollo: Apollo,
+        private router: Router,) {
         this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUser = this.currentUserSubject.asObservable();
     }
@@ -48,6 +50,10 @@ export class userGQL {
             this.currentUserSubject.next(user.data);
             return user;
         }));
+    }
+    public logout(usert:any) {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/auth/login']);
     }
     public get currentUserValue(){
 

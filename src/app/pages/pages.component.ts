@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { userGQL } from '../graphql/user';
 
 @Component({
   selector: 'pages-root',
@@ -16,31 +17,23 @@ export class PagesComponent implements OnInit {
       title: 'Mis mascotas',
       url: '/pages/inicio',
       icon: 'paw'
-    },
-    {
-      title: 'Sincronizar datos',
-      url: '/pages/inicio',
-      icon: 'cloud-upload'
-    },
-    {
+    },{
       title: 'Ley para la defensa de animales',
       url: '/pages/leyes',
       icon: 'library'
-    },{
-      title: 'Informacion',
-      url: '/folder/Archived',
-      icon: 'information-circle'
-    },{
-      title: 'Salir',
-      url: '/folder/Archived',
-      icon: 'log-out'
     }
+    // },{
+    //   title: 'Informacion',
+    //   url: '/folder/Archived',
+    //   icon: 'information-circle'
+    // }
   ];
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private user: userGQL
   ) {
     this.initializeApp();
   }
@@ -53,5 +46,8 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  logout() {
+    
   }
 }
